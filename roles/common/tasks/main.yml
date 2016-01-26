@@ -1,0 +1,19 @@
+---
+
+- name: Install common packages
+  become: true
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+    - build-essential
+    - bzip2
+    - curl
+    - diffutils
+    - gcc
+    - htop
+    - iotop
+    - make
+    - unzip
+    - vim
+    - wget
+    - whois
+    - zip
