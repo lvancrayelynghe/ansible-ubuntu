@@ -1,0 +1,9 @@
+---
+
+- name: Configure locales
+  lineinfile: dest=/var/lib/locales/supported.d/local regexp="{{ item }}" line="{{ item }}"
+  notify:
+    - Generate locales
+  with_items:
+    - en_US.UTF-8 UTF-8
+    - fr_FR.UTF-8 UTF-8

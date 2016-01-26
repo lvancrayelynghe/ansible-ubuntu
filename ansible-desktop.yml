@@ -4,3 +4,4 @@
   roles:
     - common
     - zsh
+    - locales
