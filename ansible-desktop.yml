@@ -2,6 +2,10 @@
 
 - name: Ubuntu desktop environment playbook
   hosts: localhost
+  vars:
+    aptcachetime: 3600
+    locale: "fr_FR.UTF-8"
+    timezone: "Europe/Paris"
   roles:
     - common
     - zsh

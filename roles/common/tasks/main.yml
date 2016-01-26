@@ -9,7 +9,7 @@
   become: true
 
 - name: Ensure that Aptitude repositories are up to date
-  apt: update_cache=yes cache_valid_time=3600
+  apt: update_cache=yes cache_valid_time={{ aptcachetime }}
   register: AptCacheUpdated
   become: true
 
@@ -19,7 +19,7 @@
   when: AptCacheUpdated | changed
 
 - name: Install common packages
-  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   become: true
   when: AptCacheUpdated | changed
   with_items:

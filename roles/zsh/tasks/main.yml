@@ -2,7 +2,7 @@
 
 - name: Install ZSH with Aptitude
   become: true
-  apt: pkg=zsh state=latest update_cache=yes cache_valid_time=3600
+  apt: pkg=zsh state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
 
 - name: Gather default shell facts
   shell: 'echo $SHELL'
