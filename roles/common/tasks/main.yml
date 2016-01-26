@@ -1,5 +1,13 @@
 ---
 
+- name: Ensure that Aptitude repositories are up to date
+  apt: update_cache=yes
+  become: true
+
+- name: Upgrade installed packages
+  apt: upgrade=safe
+  become: true
+
 - name: Install common packages
   become: true
   apt: pkg={{ item }} state=latest update_cache=yes
