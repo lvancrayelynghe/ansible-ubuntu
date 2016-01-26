@@ -16,12 +16,12 @@
 - name: Upgrade installed packages
   apt: upgrade=yes
   become: true
-  when: AptCacheUpdated | changed
+  when: AptCacheUpdated | changed or aptcachetime == 0
 
 - name: Install common packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   become: true
-  when: AptCacheUpdated | changed
+  when: AptCacheUpdated | changed or aptcachetime == 0
   with_items:
     - build-essential
     - bzip2
