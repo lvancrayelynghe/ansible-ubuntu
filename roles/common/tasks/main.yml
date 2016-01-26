@@ -2,7 +2,7 @@
 
 - name: Install common packages
   become: true
-  apt: pkg={{ item }} state=installed update_cache=yes
+  apt: pkg={{ item }} state=latest update_cache=yes
   with_items:
     - build-essential
     - bzip2
@@ -24,6 +24,7 @@
     - less
     - make
     - nano
+    - nmap
     - openssl
     - p7zip
     - pwgen
