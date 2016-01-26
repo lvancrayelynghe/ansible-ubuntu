@@ -1,6 +1,7 @@
 ---
 
-- hosts: localhost
+- name: Ubuntu desktop environment playbook
+  hosts: localhost
   roles:
     - common
     - zsh
