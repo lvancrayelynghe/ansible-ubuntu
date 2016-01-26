@@ -26,6 +26,7 @@
     - nano
     - openssl
     - p7zip
+    - pwgen
     - rsync
     - software-properties-common
     - sshpass
