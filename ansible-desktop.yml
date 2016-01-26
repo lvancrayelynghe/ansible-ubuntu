@@ -3,4 +3,4 @@
 - hosts: localhost
   roles:
     - common
-
+    - zsh

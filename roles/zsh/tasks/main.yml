@@ -1,0 +1,14 @@
+---
+
+- name: Install ZSH with Aptitude
+  become: true
+  apt: pkg=zsh state=installed update_cache=yes
+
+- name: Gather default shell facts
+  shell: 'echo $SHELL'
+  register: default_shell
+  changed_when: false
+
+- name: Make ZSH default shell
+  shell: chsh -s /bin/zsh
+  when: default_shell.stdout.find('/bin/zsh') == -1
