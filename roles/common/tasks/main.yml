@@ -1,5 +1,13 @@
 ---
 
+- name: Enable all repositories in sources.list
+  replace:
+    dest: /etc/apt/sources.list
+    regexp: '^#\s?deb(.+)http://(.+)/ubuntu(.+)$'
+    replace: 'deb\1http://\2/ubuntu\3'
+    backup: yes
+  become: true
+
 - name: Ensure that Aptitude repositories are up to date
   apt: update_cache=yes
   become: true
