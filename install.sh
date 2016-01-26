@@ -18,4 +18,4 @@ fi
 ###################
 # Install ansible #
 echo "Run ansible with :"
-echo "  ansible-playbook -i hosts -c local ansible-desktop.yml"
+echo "  ansible-playbook ansible-desktop.yml"
