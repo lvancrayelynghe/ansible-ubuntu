@@ -12,3 +12,14 @@
 - name: Make ZSH default shell
   shell: chsh -s /bin/zsh
   when: default_shell.stdout.find('/bin/zsh') == -1
+
+- name: Gather default shell facts (for root)
+  shell: 'echo $SHELL'
+  register: default_root_shell
+  changed_when: false
+  become: true
+
+- name: Make ZSH default shell (for root)
+  shell: chsh root -s /bin/zsh
+  when: default_root_shell.stdout.find('/bin/zsh') == -1
+  become: true
