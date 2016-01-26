@@ -1,4 +1,9 @@
 ---
 
 - name: Generate locales
-  command: /usr/sbin/locale-gen
+  command: locale-gen
+  become: true
+
+- name: Update TimeZone data
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+  become: true
