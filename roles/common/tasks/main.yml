@@ -6,12 +6,31 @@
   with_items:
     - build-essential
     - bzip2
+    - cowsay
     - curl
     - diffutils
+    - dos2unix
+    - fortune
+    - ftp
+    - ftp-ssl
     - gcc
+    - git
+    - grep
+    - gzip
     - htop
+    - httping
+    - iftop
     - iotop
+    - less
     - make
+    - nano
+    - openssl
+    - p7zip
+    - rsync
+    - software-properties-common
+    - sshpass
+    - tar
+    - tmux
     - unzip
     - vim
     - wget
