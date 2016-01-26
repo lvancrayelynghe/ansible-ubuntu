@@ -10,15 +10,18 @@
 
 - name: Ensure that Aptitude repositories are up to date
   apt: update_cache=yes cache_valid_time=3600
+  register: AptCacheUpdated
   become: true
 
 - name: Upgrade installed packages
   apt: upgrade=yes
   become: true
+  when: AptCacheUpdated | changed
 
 - name: Install common packages
-  become: true
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  become: true
+  when: AptCacheUpdated | changed
   with_items:
     - build-essential
     - bzip2
