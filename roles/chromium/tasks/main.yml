@@ -1,0 +1,5 @@
+---
+
+- name: Install Chromium
+  apt: pkg=chromium-browser state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  become: true
