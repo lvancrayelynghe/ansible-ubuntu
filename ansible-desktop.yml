@@ -6,6 +6,8 @@
     aptcachetime: 3600
     locale: "fr_FR.UTF-8"
     timezone: "Europe/Paris"
+    virtualbox:
+      version: "5.0"
   roles:
     # - locales
     # - common

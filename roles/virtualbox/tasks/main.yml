@@ -1,0 +1,10 @@
+---
+
+- name: Configure the Oracle APT key
+  apt_key: url=https://www.virtualbox.org/download/oracle_vbox.asc state=present
+
+- name: Configure the VirtualBox APT repositories
+  apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib" state=present
+
+- name: Install VirtualBox
+  apt: pkg=virtualbox-{{ virtualbox.version }} state=present
