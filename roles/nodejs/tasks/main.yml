@@ -1,9 +1,5 @@
 ---
 
-- name: Make sure Node.js is uninstalled
-  apt: pkg=nodejs state=absent purge=true
-  become: true
-
 - name: Installing apt-key
   apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
   become: true
@@ -22,8 +18,4 @@
 
 - name: Install Node.js
   apt: pkg=nodejs state=latest update_cache=yes
-  become: true
-
-- name: Install npm
-  apt: pkg=npm state=latest
   become: true
