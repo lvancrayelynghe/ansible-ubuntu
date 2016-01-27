@@ -7,12 +7,12 @@
   changed_when: vagrant_check_deb.rc == 1
   become: true
 
-- name: Download Vagrant
-  get_url: url="{{ vagrant.deb_url }}" dest="/tmp/download-vagrant-latest.deb"
+- name: Download Vagrant {{ vagrant.version }}
+  get_url: url="https://releases.hashicorp.com/vagrant/{{ vagrant.version }}/vagrant_{{ vagrant.version }}_x86_64.deb" dest="/tmp/download-vagrant-latest.deb"
   become: true
   when: vagrant_check_deb.rc == 1
 
-- name: Install Vagrant
+- name: Install Vagrant {{ vagrant.version }}
   apt: deb="/tmp/download-vagrant-latest.deb"
   become: true
   when: vagrant_check_deb.rc == 1
