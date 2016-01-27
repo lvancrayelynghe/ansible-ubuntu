@@ -1,0 +1,7 @@
+---
+
+- name: Add LibreOffice repository
+  apt_repository: repo="ppa:libreoffice/libreoffice-5-0" state=present
+
+- name: Install LibreOffice
+  apt: name=libreoffice state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
