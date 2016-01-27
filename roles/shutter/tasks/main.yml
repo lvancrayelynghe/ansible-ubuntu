@@ -1,0 +1,4 @@
+---
+
+- name: Install Shutter screenshot tool
+  apt: name=shutter state=present
