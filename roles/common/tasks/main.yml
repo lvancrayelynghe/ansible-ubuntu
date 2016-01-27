@@ -59,6 +59,7 @@
     - pwgen
     - rsync
     - software-properties-common
+    - sshfs
     - sshpass
     - tar
     - tmux
