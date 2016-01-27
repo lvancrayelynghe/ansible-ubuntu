@@ -2,18 +2,28 @@
 
 - name: Make sure Node.js is uninstalled
   apt: pkg=nodejs state=absent purge=true
+  become: true
 
 - name: Installing apt-key
   apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+  become: true
 
 - name: Import the NodeSource GPG key into apt
   apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+  become: true
 
 - name: Add NodeSource deb repository
-  apt_repository: repo='deb https://deb.nodesource.com/node_5.x {{ ansible_distribution_release }} main' state=present
+  apt_repository: repo='deb {{ nodejs.repository }} {{ ansible_distribution_release }} main' state=present
+  become: true
 
 - name: Add NodeSource deb-src repository
-  apt_repository: repo='deb-src https://deb.nodesource.com/node_5.x {{ ansible_distribution_release }} main' state=present
+  apt_repository: repo='deb-src {{ nodejs.repository }} {{ ansible_distribution_release }} main' state=present
+  become: true
 
 - name: Install Node.js
   apt: pkg=nodejs state=latest update_cache=yes
+  become: true
+
+- name: Install npm
+  apt: pkg=npm state=latest
+  become: true
