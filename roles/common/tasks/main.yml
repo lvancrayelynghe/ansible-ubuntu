@@ -1,5 +1,15 @@
 ---
 
+- name: Ensure the system can use the HTTPS transport for APT
+  stat: path=/usr/lib/apt/methods/https
+  register: apt_https_transport
+  become: true
+
+- name: Install HTTPS transport for APT
+  apt: pkg=apt-transport-https state=installed
+  when: not apt_https_transport.stat.exists
+  become: true
+
 - name: Enable all repositories in sources.list
   replace:
     dest: /etc/apt/sources.list
