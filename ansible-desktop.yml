@@ -18,4 +18,5 @@
     # - gulp
     # - browsersync
     # - bower
+    # - ruby
     - vagrant
