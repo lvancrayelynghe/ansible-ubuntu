@@ -6,12 +6,12 @@
     aptcachetime: 3600
     locale: "fr_FR.UTF-8"
     timezone: "Europe/Paris"
+    ruby:
+      version: "2.2"
     virtualbox:
       version: "5.0"
     vagrant:
       deb_url: "https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb"
-    ruby:
-      version: "2.2"
   roles:
     # - locales
     # - common
@@ -21,4 +21,4 @@
     # - browsersync
     # - bower
     # - ruby
-    - vagrant
+    # - vagrant
