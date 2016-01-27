@@ -1,8 +1,4 @@
 ---
 
-- name: Set npm global packages path
-  command: npm config set prefix "{{ ansible_env.HOME }}/.npm-packages"
-  changed_when: false
-
 - name: Installs gulp globally using npm
-  npm: name=gulp state=latest global=yes
+  npm: name=gulp state=present global=yes

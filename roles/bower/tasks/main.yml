@@ -1,0 +1,4 @@
+---
+
+- name: Installs Bower globally using npm
+  npm: name=bower state=present global=yes
