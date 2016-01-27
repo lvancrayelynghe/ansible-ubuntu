@@ -1,0 +1,15 @@
+---
+
+- name: Check if gulp is installed
+  command: type gulp
+  ignore_errors: yes
+  changed_when: false
+  register: gulp_check
+
+- name: Set npm global packages path
+  command: npm config set prefix "{{ ansible_env.HOME }}/.npm-packages"
+  when: gulp_check.rc != 0
+
+- name: Installs gulp globally using npm
+  command: npm install gulp -g
+  when: gulp_check.rc != 0
