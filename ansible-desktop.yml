@@ -24,4 +24,5 @@
     # - vagrant
     # - java-openjdk
     # - mailcatcher
+    - exim
 

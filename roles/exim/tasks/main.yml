@@ -1,0 +1,24 @@
+---
+
+- name: Ensure exim is installed
+  apt: name=exim4 state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  become: true
+
+- name: Configure exim (1/2)
+  lineinfile: dest="{{ exim.configuration_file1 }}" regexp="{{ item.regexp }}" line="{{ item.line }}" state=present
+  with_items:
+    - { regexp: '^dc_eximconfig_configtype', line: "dc_eximconfig_configtype='{{ exim.dc_eximconfig_configtype }}'" }
+    - { regexp: '^dc_localdelivery', line: "dc_localdelivery='{{ exim.dc_localdelivery }}'" }
+  become: true
+
+- name: Configure exim (2/2)
+  lineinfile: dest="{{ exim.configuration_file2 }}" regexp="{{ item.regexp }}" line="{{ item.line }}" state=present
+  with_items:
+    - { regexp: '^domainlist local_domains', line: "domainlist local_domains = " }
+  notify: Restart exim
+  become: true
+
+- name: Ensure exim is running
+  service: name="{{ exim.daemon }}" state=started enabled="{{ exim.service_enabled }}"
+  when: exim.start == true
+  become: true

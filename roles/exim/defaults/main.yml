@@ -1,0 +1,10 @@
+---
+
+exim:
+  daemon: exim4
+  configuration_file1: /etc/exim4/update-exim4.conf.conf
+  configuration_file2: /etc/exim4/exim4.conf.template
+  dc_eximconfig_configtype: internet
+  dc_localdelivery: mail_spool
+  start: false
+  service_enabled: "no"
