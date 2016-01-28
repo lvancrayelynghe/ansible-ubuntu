@@ -26,5 +26,6 @@
     # - mailcatcher
     # - exim
     # - memcached
-    - redis
+    # - redis
+    - beanstalkd
 

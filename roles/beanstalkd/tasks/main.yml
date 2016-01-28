@@ -1,0 +1,10 @@
+---
+
+- name: Install Beanstalkd
+  apt: pkg=beanstalkd state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  become: true
+
+- name: "Ensure Beanstalkd is {{ beanstalkd.start | ternary('started','stopped') }}"
+  service: name="beanstalkd" state={{ beanstalkd.start | ternary('started','stopped') }} enabled="{{ beanstalkd.service_enabled }}"
+  notify: Restart Beanstalkd if needed
+  become: true
