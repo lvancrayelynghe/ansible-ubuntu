@@ -1,0 +1,5 @@
+---
+
+- name: Install Fail2ban
+  apt: pkg=fail2ban state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  become: true
