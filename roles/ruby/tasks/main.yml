@@ -4,4 +4,7 @@
   apt_repository: repo="ppa:brightbox/ruby-ng" state=present
 
 - name: Install Ruby {{ ruby.version }} and Ruby gems
-  apt: pkg=ruby{{ ruby.version }} state=present
+  apt: pkg="{{ item }}" state=latest update_cache=yes
+  with_items:
+    - ruby{{ ruby.version }}
+    - ruby{{ ruby.version }}-dev

@@ -1,31 +1,31 @@
 ---
 
 - name: Install Mailcatcher packages dependencies
-  apt: name: "{{ item }}" state: present update_cache=yes cache_valid_time={{ aptcachetime }}
+  apt: name="{{ item }}" state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   become: true
   with_items:
     - libsqlite3-dev
     - g++
 
 - name: Install Mailcatcher Gem i18n dependency
-  gem: name: i18n state: present user_install: no
+  gem: name=i18n state=present user_install=no
   become: true
 
 - name: Install Mailcatcher Package
-  gem: name: mailcatcher state: present user_install: no
+  gem: name=mailcatcher state=present user_install=no
   become: true
 
 - name: Add Mailcatcher service init.d file
-  template: src: services.j2 dest: /etc/init.d/mailcatcher owner: root mode: 0755
+  template: src=service.j2 dest=/etc/init.d/mailcatcher owner=root mode=0755
   become: true
 
 - name: Add Mailcatcher config template
-  template: src: config.j2 dest: /etc/default/mailcatcher
+  template: src=config.j2 dest=/etc/default/mailcatcher
   notify: Mailcatcher restart
   when: mailcatcher.start == true
   become: true
 
 - name: Add Mailcatcher service
-  service: name: mailcatcher state: started enabled: {{ mailcatcher.service_enabled }}
+  service: name=mailcatcher state=started enabled={{ mailcatcher.service_enabled }}
   when: mailcatcher.start == true
   become: true
