@@ -25,5 +25,6 @@
     # - java-openjdk
     # - mailcatcher
     # - exim
-    - memcached
+    # - memcached
+    - redis
 
