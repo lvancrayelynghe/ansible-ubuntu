@@ -1,5 +1,9 @@
 ---
 
+- name: Add Redis repository
+  apt_repository: repo='ppa:chris-lea/redis-server' state=present update_cache=yes
+  become: true
+
 - name: Install Redis
   apt: pkg=redis-server state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   become: true
