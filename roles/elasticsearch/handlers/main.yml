@@ -1,3 +1,4 @@
 ---
-- name: Restart elasticsearch
-  service: name=elasticsearch state=restarted
+
+- name: Restart Elasticsearch if needed
+  service: name=elasticsearch state={{ elasticsearch.start | ternary('restarted','stopped') }}

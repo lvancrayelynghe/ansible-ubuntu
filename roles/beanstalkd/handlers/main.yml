@@ -1,3 +1,4 @@
 ---
+
 - name: Restart Beanstalkd if needed
-  service: name="beanstalkd" state="{{ beanstalkd.start | ternary('restarted','stopped') }}"
+  service: name=beanstalkd state={{ beanstalkd.start | ternary('restarted','stopped') }}
