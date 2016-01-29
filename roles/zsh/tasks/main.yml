@@ -14,6 +14,10 @@
   register: default_shell
   changed_when: false
 
-- name: Make ZSH default shell for {{ local_username.stdout }}
+- name: Make ZSH default shell for root
   shell: chsh -s /bin/zsh
+  when: default_shell.stdout.find('/bin/zsh') == -1
+
+- name: "Make ZSH default shell for {{ ansible_user_id }}"
+  shell: "chsh {{ ansible_user_id }} -s /bin/zsh"
   when: default_shell.stdout.find('/bin/zsh') == -1
