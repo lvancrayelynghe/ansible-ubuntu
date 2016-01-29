@@ -12,7 +12,6 @@
 - name: Configure Elasticsearch
   lineinfile: dest=/etc/elasticsearch/elasticsearch.yml regexp="{{ item.regexp }}" line="{{ item.line }}" state=present
   with_items:
-    - { regexp: '^script\.disable_dynamic', line: 'script.disable_dynamic: true' }
     - { regexp: 'network\.host', line: 'network.host: localhost' }
 
 - name: "Ensure Elasticsearch is {{ elasticsearch.start | ternary('started','stopped') }}"
