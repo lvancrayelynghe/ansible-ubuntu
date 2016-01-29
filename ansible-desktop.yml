@@ -31,9 +31,9 @@
     vagrant:
       version: "1.8.1"
   roles:
-    - { role: locales, become: true }
-    - { role: common, become: true }
-    - { role: zsh, become: true }
+    # - { role: locales, become: true }
+    # - { role: common, become: true }
+    # - { role: zsh, become: true }
     # - { role: nodejs, become: true }
     # - { role: gulp}
     # - { role: browsersync }
