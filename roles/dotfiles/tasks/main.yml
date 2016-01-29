@@ -1,0 +1,24 @@
+---
+
+- name: Create public dotfiles directory
+  file: path="{{ ansible_env.HOME }}/dotfiles/public" state=directory
+  register: public_dotfiles_create
+
+- name: Clone public dotfiles repository
+  git: repo=https://github.com/Benoth/dotfiles.git dest="{{ ansible_env.HOME }}/dotfiles/public" update=yes accept_hostkey=yes
+
+- name: Configure repository
+  command: git config --local user.email "benoth83@gmail.com"
+  args:
+    chdir: "{{ ansible_env.HOME }}/dotfiles/public"
+  when: public_dotfiles_create.changed
+
+- name: Configure repository
+  command: git config --local user.name "Benoth"
+  args:
+    chdir: "{{ ansible_env.HOME }}/dotfiles/public"
+  when: public_dotfiles_create.changed
+
+- name: Create private dotfiles directory
+  file: path="{{ ansible_env.HOME }}/dotfiles/private" state=directory
+
