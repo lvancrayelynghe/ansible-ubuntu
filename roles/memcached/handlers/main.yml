@@ -1,3 +1,3 @@
 ---
 - name: Restart Memcached if needed
-  service: name="memcached" state="{{ memcached.start | ternary('restarted','stopped') }}"
+  service: name=memcached state={{ memcached.start | ternary('restarted','stopped') }}
