@@ -1,20 +1,19 @@
 ---
 
-- name: Ensure exim is installed
+- name: Ensure Exim is installed
   apt: name=exim4 state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
 
-- name: Configure exim (1/2)
+- name: Configure Exim (1/2)
   lineinfile: dest=/etc/exim4/update-exim4.conf.conf regexp="{{ item.regexp }}" line="{{ item.line }}" state=present
   with_items:
     - { regexp: '^dc_eximconfig_configtype', line: "dc_eximconfig_configtype='{{ exim.dc_eximconfig_configtype }}'" }
     - { regexp: '^dc_localdelivery', line: "dc_localdelivery='{{ exim.dc_localdelivery }}'" }
 
-- name: Configure exim (2/2)
+- name: Configure Exim (2/2)
   lineinfile: dest=/etc/exim4/exim4.conf.template regexp="{{ item.regexp }}" line="{{ item.line }}" state=present
   with_items:
     - { regexp: '^domainlist local_domains', line: "domainlist local_domains = " }
-  notify: Restart exim
 
-- name: Ensure exim is running
-  service: name="{{ exim.daemon }}" state=started enabled="{{ exim.service_enabled }}"
-  when: exim.start == true
+- name: "Ensure Exim is {{ exim.start | ternary('started','stopped') }}"
+  service: name=exim state={{ exim.start | ternary('started','stopped') }} enabled={{ exim.service_enabled }}
+  notify: Restart Exim if needed

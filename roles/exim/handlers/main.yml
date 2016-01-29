@@ -1,3 +1,4 @@
 ---
-- name: Restart exim
-  service: name="{{ exim.daemon }}" state=restarted
+
+- name: Restart Exim if needed
+  service: name="{{ exim.daemon }}" state={{ exim.start | ternary('restarted','stopped') }}
