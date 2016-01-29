@@ -6,6 +6,24 @@
     aptcachetime: 3600
     locale: "fr_FR.UTF-8"
     timezone: "Europe/Paris"
+    beanstalkd:
+      start: false
+      service_enabled: no
+    elasticsearch:
+      start: false
+      service_enabled: no
+    exim:
+      start: false
+      service_enabled: no
+    mailcatcher:
+      start: false
+      service_enabled: no
+    memcached:
+      start: false
+      service_enabled: no
+    redis:
+      start: false
+      service_enabled: no
     ruby:
       version: "2.2"
     virtualbox:

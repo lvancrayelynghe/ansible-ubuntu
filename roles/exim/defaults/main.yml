@@ -5,4 +5,4 @@ exim:
   dc_eximconfig_configtype: internet
   dc_localdelivery: mail_spool
   start: false
-  service_enabled: "no"
+  service_enabled: no
