@@ -2,6 +2,7 @@
 
 - name: Set npm global packages path
   command: npm config set prefix "{{ ansible_env.HOME }}/.npm-packages"
+  changed_when: false
 
 - name: Installs Bower globally using npm
   npm: name=bower state=present global=yes
