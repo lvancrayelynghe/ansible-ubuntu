@@ -1,7 +1,6 @@
 ---
 
 exim:
-  daemon: exim4
   dc_eximconfig_configtype: internet
   dc_localdelivery: mail_spool
   start: false

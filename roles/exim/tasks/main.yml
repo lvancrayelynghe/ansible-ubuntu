@@ -15,5 +15,5 @@
     - { regexp: '^domainlist local_domains', line: "domainlist local_domains = " }
 
 - name: "Ensure Exim is {{ exim.start | ternary('started','stopped') }}"
-  service: name=exim state={{ exim.start | ternary('started','stopped') }} enabled={{ exim.service_enabled }}
+  service: name=exim4 state={{ exim.start | ternary('started','stopped') }} enabled={{ exim.service_enabled }}
   notify: Restart Exim if needed
