@@ -1,0 +1,8 @@
+---
+
+- name: Install Python packages
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - python
+    - python-dev
+    - python-pip
