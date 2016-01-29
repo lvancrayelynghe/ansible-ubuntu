@@ -1,4 +1,7 @@
 ---
 
+- name: Set npm global packages path
+  command: npm config set prefix "{{ ansible_env.HOME }}/.npm-packages"
+
 - name: Installs BrowserSync globally using npm
   npm: name=browser-sync state=present global=yes

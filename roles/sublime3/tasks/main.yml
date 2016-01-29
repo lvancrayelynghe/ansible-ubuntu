@@ -2,15 +2,12 @@
 
 - name: Add sublime repository
   apt_repository: repo="ppa:webupd8team/sublime-text-3" state=present
-  become: true
 
 - name: Update package manager
   apt: update_cache=yes
-  become: true
 
 - name: Install latest sublime package
   apt: pkg="sublime-text-installer" state=latest
-  become: true
 
 - name: Install package control for sublime
   get_url: url="https://packagecontrol.io/Package%20Control.sublime-package" dest="{{ ansible_env.HOME }}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package"

@@ -2,19 +2,15 @@
 
 - name: Add Redis repository
   apt_repository: repo='ppa:chris-lea/redis-server' state=present update_cache=yes
-  become: true
 
 - name: Install Redis
   apt: pkg=redis-server state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  become: true
 
 - name: Configure Redis
   lineinfile: dest="/etc/redis/redis.conf" regexp="{{ item.regexp }}" line="{{ item.line }}" state=present
   with_items:
     - { regexp: 'bind 127\.0\.0\.1', line: "bind 127.0.0.1" }
-  become: true
 
 - name: "Ensure Redis is {{ redis.start | ternary('started','stopped') }}"
   service: name="redis-server" state={{ redis.start | ternary('started','stopped') }} enabled="{{ redis.service_enabled }}"
   notify: Restart Redis if needed
-  become: true

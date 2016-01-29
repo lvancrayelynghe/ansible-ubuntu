@@ -2,9 +2,7 @@
 
 - name: Install Memcached
   apt: pkg=memcached state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  become: true
 
 - name: "Ensure Memcached is {{ memcached.start | ternary('started','stopped') }}"
   service: name="memcached" state={{ memcached.start | ternary('started','stopped') }} enabled="{{ memcached.service_enabled }}"
   notify: Restart Memcached if needed
-  become: true

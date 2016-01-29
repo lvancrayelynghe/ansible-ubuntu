@@ -2,4 +2,3 @@
 
 - name: Install DBeaver
   apt: pkg=dbeaver state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  become: true
