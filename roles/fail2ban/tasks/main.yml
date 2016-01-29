@@ -2,3 +2,7 @@
 
 - name: Install Fail2ban
   apt: pkg=fail2ban state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+
+- name: "Ensure Fail2ban is {{ fail2ban.start | ternary('started','stopped') }}"
+  service: name=fail2ban state={{ fail2ban.start | ternary('started','stopped') }} enabled={{ fail2ban.service_enabled }}
+  notify: Restart Fail2ban if needed

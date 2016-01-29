@@ -12,6 +12,9 @@
     elasticsearch:
       start: false
       service_enabled: no
+    fail2ban:
+      start: false
+      service_enabled: no
     exim:
       dc_eximconfig_configtype: internet
       dc_localdelivery: mail_spool
@@ -47,6 +50,7 @@
     # - { role: redis, become: true }
     # - { role: beanstalkd, become: true }
     # - { role: elasticsearch, become: true }
+    - { role: fail2ban, become: true }
     # - { role: dotfiles}
     # - { role: gulp}
     # - { role: browsersync }

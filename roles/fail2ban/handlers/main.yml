@@ -1,0 +1,4 @@
+---
+
+- name: Restart Fail2ban if needed
+  service: name=fail2ban state={{ fail2ban.start | ternary('restarted','stopped') }}
