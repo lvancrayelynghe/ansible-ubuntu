@@ -12,5 +12,5 @@
     - { regexp: 'bind 127\.0\.0\.1', line: "bind 127.0.0.1" }
 
 - name: "Ensure Redis is {{ redis.start | ternary('started','stopped') }}"
-  service: name="redis-server" state={{ redis.start | ternary('started','stopped') }} enabled="{{ redis.service_enabled }}"
+  service: name=redis-server state={{ redis.start | ternary('started','stopped') }} enabled={{ redis.service_enabled }}
   notify: Restart Redis if needed
