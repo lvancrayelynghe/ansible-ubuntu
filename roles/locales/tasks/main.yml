@@ -7,18 +7,14 @@
   with_items:
     - "en_US.UTF-8 UTF-8"
     - "{{ locale }} UTF-8"
-  become: true
 
 - name: Set localtime (/etc/localtime)
   copy: remote_src=yes src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime
-  become: true
 
 - name: Set timezone (/etc/timezone)
   copy: content="{{ timezone }}\n" dest=/etc/timezone
   notify:
     - Update TimeZone data
-  become: true
 
 - name: Install ntp package
   action: apt pkg=ntp state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  become: true

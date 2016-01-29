@@ -3,35 +3,25 @@
 - name: Ensure the system can use the HTTPS transport for APT
   stat: path=/usr/lib/apt/methods/https
   register: apt_https_transport
-  become: true
 
 - name: Install HTTPS transport for APT
   apt: pkg=apt-transport-https state=installed
   when: not apt_https_transport.stat.exists
-  become: true
 
 - name: Enable all repositories in sources.list
-  replace:
-    dest: /etc/apt/sources.list
-    regexp: '^#\s?deb(.+)http://(.+)/ubuntu(.+)$'
-    replace: 'deb\1http://\2/ubuntu\3'
-    backup: yes
-  become: true
+  replace: dest=/etc/apt/sources.list regexp='^#\s?deb(.+)http://(.+)/ubuntu(.+)$' replace='deb\1http://\2/ubuntu\3' backup=yes
 
 - name: Ensure that Aptitude repositories are up to date
   apt: update_cache=yes cache_valid_time={{ aptcachetime }}
-  register: AptCacheUpdated
-  become: true
+  register: apt_cache_updated
 
 - name: Upgrade installed packages
   apt: upgrade=yes
-  become: true
-  when: AptCacheUpdated | changed or aptcachetime == 0
+  when: apt_cache_updated | changed or aptcachetime == 0
 
 - name: Install common packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  become: true
-  when: AptCacheUpdated | changed or aptcachetime == 0
+  when: apt_cache_updated | changed or aptcachetime == 0
   with_items:
     - build-essential
     - bzip2

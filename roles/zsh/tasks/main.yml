@@ -1,25 +1,19 @@
 ---
 
 - name: Install ZSH with Aptitude
-  become: true
   apt: pkg=zsh state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+
+- name: Gather current user name
+  command: whoami
+  register: local_username
+  changed_when: false
+  delegate_to: 127.0.0.1
 
 - name: Gather default shell facts
   shell: 'echo $SHELL'
   register: default_shell
   changed_when: false
 
-- name: Make ZSH default shell
+- name: Make ZSH default shell for {{ local_username.stdout }}
   shell: chsh -s /bin/zsh
   when: default_shell.stdout.find('/bin/zsh') == -1
-
-- name: Gather default shell facts (for root)
-  shell: 'echo $SHELL'
-  register: default_root_shell
-  changed_when: false
-  become: true
-
-- name: Make ZSH default shell (for root)
-  shell: chsh root -s /bin/zsh
-  when: default_root_shell.stdout.find('/bin/zsh') == -1
-  become: true

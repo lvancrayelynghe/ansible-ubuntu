@@ -13,19 +13,18 @@
     vagrant:
       version: "1.8.1"
   roles:
-    # - locales
-    # - common
-    # - zsh
-    # - nodejs
-    # - gulp
-    # - browsersync
-    # - bower
-    # - ruby
-    # - vagrant
-    # - java-openjdk
-    # - mailcatcher
-    # - exim
-    # - memcached
-    # - redis
-    - beanstalkd
-
+    - { role: locales, become: true }
+    - { role: common, become: true }
+    - { role: zsh, become: true }
+    # - { role: nodejs, become: true }
+    # - { role: gulp}
+    # - { role: browsersync }
+    # - { role: bower }
+    # - { role: ruby, become: true }
+    # - { role: vagrant, become: true }
+    # - { role: java-openjdk, become: true }
+    # - { role: mailcatcher, become: true }
+    # - { role: exim, become: true }
+    # - { role: memcached, become: true }
+    # - { role: redis, become: true }
+    # - { role: beanstalkd, become: true }
