@@ -13,6 +13,8 @@
       start: false
       service_enabled: no
     exim:
+      dc_eximconfig_configtype: internet
+      dc_localdelivery: mail_spool
       start: false
       service_enabled: no
     mailcatcher:
@@ -44,6 +46,7 @@
     # - { role: memcached, become: true }
     # - { role: redis, become: true }
     # - { role: beanstalkd, become: true }
+    # - { role: dotfiles}
     # - { role: gulp}
     # - { role: browsersync }
     # - { role: bower }
