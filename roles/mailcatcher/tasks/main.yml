@@ -19,5 +19,4 @@
   template: src=config.j2 dest=/etc/default/mailcatcher
 
 - name: "Ensure Mailcatcher is {{ mailcatcher.start | ternary('started','stopped') }}"
-  service: name=mailcatcher state={{ mailcatcher.start | ternary('started','stopped') }} enabled={{ mailcatcher.service_enabled }}
-  notify: Restart Mailcatcher if needed
+  service: name=mailcatcher state={{ mailcatcher.start | ternary('restarted','stopped') }} enabled={{ mailcatcher.service_enabled }}

@@ -15,5 +15,4 @@
     - { regexp: 'network\.host', line: 'network.host: localhost' }
 
 - name: "Ensure Elasticsearch is {{ elasticsearch.start | ternary('started','stopped') }}"
-  service: name=elasticsearch state={{ elasticsearch.start | ternary('started','stopped') }} enabled={{ elasticsearch.service_enabled }}
-  notify: Restart Elasticsearch if needed
+  service: name=elasticsearch state={{ elasticsearch.start | ternary('restarted','stopped') }} enabled={{ elasticsearch.service_enabled }}

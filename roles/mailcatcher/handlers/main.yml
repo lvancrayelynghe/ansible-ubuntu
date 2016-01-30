@@ -1,4 +1,4 @@
 ---
 
-- name: Restart Mailcatcher if needed
-  service: name=mailcatcher state={{ mailcatcher.start | ternary('restarted','stopped') }}
+- name: Restart Mailcatcher
+  service: name=mailcatcher state=restarted

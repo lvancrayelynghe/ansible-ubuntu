@@ -1,4 +1,4 @@
 ---
 
-- name: Restart Redis if needed
-  service: name=redis-server state={{ redis.start | ternary('restarted','stopped') }}
+- name: Restart Redis
+  service: name=redis-server state=restarted
