@@ -1,4 +1,18 @@
 ---
 
+- name: Check if DBeaver is installed
+  command: dpkg-query -W dbeaver
+  register: dbeaver_check_deb
+  failed_when: dbeaver_check_deb.rc > 1
+  changed_when: dbeaver_check_deb.rc == 1
+
+- name: Download DBeaver
+  get_url: url="http://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb" dest="/tmp/download-dbeaver-latest.deb"
+  when: dbeaver_check_deb.rc == 1
+
 - name: Install DBeaver
-  apt: pkg=dbeaver state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  apt: deb="/tmp/download-dbeaver-latest.deb"
+  when: dbeaver_check_deb.rc == 1
+
+- name: Clean DBeaver deb file
+  file: path=/tmp/download-dbeaver-latest.deb state=absent
