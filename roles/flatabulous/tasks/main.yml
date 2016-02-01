@@ -11,15 +11,20 @@
 
 - name: Install Ultra flat icons
   apt: pkg=ultra-flat-icons state=latest
+  register: ultra_flat_icons
 
 - name: Install Flatabulous
   git: repo=https://github.com/anmoljagetia/Flatabulous dest=/usr/share/themes/Flatabulous update=yes
+  register: flatabulous_git
 
 - name: Set GTK Icons to Ultra-Flat
   command: "gsettings set org.gnome.desktop.interface icon-theme Ultra-Flat"
+  when: ultra_flat_icons.changed
 
 - name: Set GTK Theme to Flatabulous
   command: "gsettings set org.gnome.desktop.interface gtk-theme Flatabulous"
+  when: flatabulous_git.changed
 
 - name: Set Windows Manager Theme to Flatabulous
   command: "gsettings set org.gnome.desktop.wm.preferences theme Flatabulous"
+  when: flatabulous_git.changed
