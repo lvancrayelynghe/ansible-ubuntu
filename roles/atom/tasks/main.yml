@@ -1,7 +1,10 @@
 ---
 
-- name: Add atom repository (Webupd8team)
+- name: Add Atom repository (Webupd8team)
   apt_repository: repo="ppa:webupd8team/atom" state=present
 
-- name: Install atom text editor
+- name: Install Atom text editor
   apt: name=atom state=present update_cache=yes
+
+- name: Setup Atom Packages
+  apm: name=sync-settings # All others packages are managed by sync-settings
