@@ -1,4 +1,0 @@
----
-
-- name: Install VLC
-  apt: pkg=vlc state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
