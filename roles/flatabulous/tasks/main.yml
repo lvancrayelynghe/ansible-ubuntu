@@ -14,7 +14,7 @@
   register: ultra_flat_icons
 
 - name: Install Flatabulous
-  git: repo=https://github.com/anmoljagetia/Flatabulous dest=/usr/share/themes/Flatabulous update=yes
+  git: repo=https://github.com/anmoljagetia/Flatabulous dest=/usr/share/themes/Flatabulous update=yes accept_hostkey=yes
   register: flatabulous_git
 
 - name: Set GTK Icons to Ultra-Flat
