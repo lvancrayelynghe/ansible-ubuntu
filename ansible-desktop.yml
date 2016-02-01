@@ -52,6 +52,7 @@
     # - { role: elasticsearch, become: true }
     # - { role: fail2ban, become: true }
     # - { role: dotfiles, become: true}
+    # - { role: desktop, become: true}
     # - { role: gulp}
     # - { role: browsersync }
     # - { role: bower }

@@ -3,21 +3,8 @@
 - name: Install ZSH with Aptitude
   apt: pkg=zsh state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
 
-- name: Gather current user name
-  command: whoami
-  register: local_username
-  changed_when: false
-  delegate_to: 127.0.0.1
+- name: Make ZSH default shell for user root
+  user: name=root shell=/bin/zsh
 
-- name: Gather default shell facts
-  shell: 'echo $SHELL'
-  register: default_shell
-  changed_when: false
-
-- name: Make ZSH default shell for root
-  shell: chsh -s /bin/zsh
-  when: default_shell.stdout.find('/bin/zsh') == -1
-
-- name: "Make ZSH default shell for {{ ansible_user_id }}"
-  shell: "chsh {{ ansible_user_id }} -s /bin/zsh"
-  when: default_shell.stdout.find('/bin/zsh') == -1
+- name: "Make ZSH default shell for user {{ ansible_env.USER }}"
+  user: name={{ ansible_env.USER }} shell=/bin/zsh
