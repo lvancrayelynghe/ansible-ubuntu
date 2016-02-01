@@ -43,6 +43,7 @@
     - less
     - make
     - nano
+    - nfs-common
     - nmap
     - openssl
     - p7zip
