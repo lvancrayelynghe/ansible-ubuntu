@@ -41,6 +41,7 @@
     - p7zip
     - pwgen
     - rsync
+    - smbclient
     - software-properties-common
     - sshfs
     - sshpass
