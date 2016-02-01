@@ -13,22 +13,16 @@
 
 - name: Ensure that Aptitude repositories are up to date
   apt: update_cache=yes cache_valid_time={{ aptcachetime }}
-  register: apt_cache_updated
-
-- name: Upgrade installed packages
-  apt: upgrade=yes
-  when: apt_cache_updated | changed or aptcachetime == 0
 
 - name: Install common packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  when: apt_cache_updated | changed or aptcachetime == 0
   with_items:
+    - aptitude
     - build-essential
     - bzip2
     - curl
     - diffutils
     - dos2unix
-    - ftp
     - ftp-ssl
     - gcc
     - git
@@ -57,3 +51,6 @@
     - wget
     - whois
     - zip
+
+- name: Upgrade installed packages
+  apt: upgrade=yes
