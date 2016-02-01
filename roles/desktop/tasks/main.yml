@@ -5,10 +5,11 @@
   with_items:
     - guake
     - libnotify-bin
+    - meld # Diff / merge tool
     - nautilus-compare
     - nautilus-image-converter
     - nautilus-image-manipulator
     - nautilus-open-terminal
     - nautilus-wipe
-    - ubuntu-restricted-extras
+    - ubuntu-restricted-extras # MP3, Microsoft fonts, Flash plugin, LAME and DVD playback
     - vlc
