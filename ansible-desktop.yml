@@ -50,8 +50,8 @@
     # - { role: redis, become: true }
     # - { role: beanstalkd, become: true }
     # - { role: elasticsearch, become: true }
-    - { role: fail2ban, become: true }
-    # - { role: dotfiles}
+    # - { role: fail2ban, become: true }
+    # - { role: dotfiles, become: true}
     # - { role: gulp}
     # - { role: browsersync }
     # - { role: bower }
