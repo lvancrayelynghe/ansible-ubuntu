@@ -1,5 +1,11 @@
 ---
 
+- name: Ensure Unity MediaScanner is removed (useless + cause high CPU peaks)
+  apt: pkg={{ item }} purge=yes state=absent
+  with_items:
+    - mediascanner2.0
+    - libmediascanner-2.0-0
+
 - name: Install common desktop packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
