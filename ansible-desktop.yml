@@ -20,6 +20,9 @@
       dc_localdelivery: mail_spool
       start: false
       service_enabled: no
+    hhvm:
+      start: false
+      service_enabled: no
     mailcatcher:
       start: false
       service_enabled: no
@@ -51,6 +54,7 @@
     # - { role: beanstalkd, become: true }
     # - { role: elasticsearch, become: true }
     # - { role: fail2ban, become: true }
+    # - { role: hhvm, become: true }
     # - { role: dotfiles, become: true}
     # - { role: desktop, become: true}
     # - { role: sublime3, become: true}

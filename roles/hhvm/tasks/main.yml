@@ -1,0 +1,17 @@
+---
+
+- name: Install HHVM gpg key
+  apt_key: url=http://dl.hhvm.com/conf/hhvm.gpg.key state=present
+
+- name: Add HHVM repository
+  apt_repository: repo='deb http://dl.hhvm.com/debian {{ ansible_distribution_release }} main' state=present
+
+- name: Install HHVM packages
+  apt: pkg={{ item }} state=latest update_cache=yes
+  with_items:
+      - hhvm
+      - libgmp-dev
+      - libmemcached-dev
+
+- name: "Ensure HHVM is {{ hhvm.start | ternary('started','stopped') }}"
+  service: name=hhvm state={{ hhvm.start | ternary('restarted','stopped') }} enabled={{ hhvm.service_enabled }}
