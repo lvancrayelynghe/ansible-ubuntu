@@ -1,0 +1,20 @@
+---
+
+- name: Install Apache2
+  apt: pkg=apache2 state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - apache2
+    - apache2-mpm-prefork
+    - apache2-mpm-worker
+    - apache2-utils
+    - apachetop
+
+- name: Enable Apache2 modules
+  apache2_module: state=present name={{ item }}
+  with_items: "{{ apache2.modules }}"
+
+- name: Remove default Apache2 vhosts
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+
+- name: "Ensure Apache2 is {{ apache2.start | ternary('started','stopped') }}"
+  service: name=apache2 state={{ apache2.start | ternary('restarted','stopped') }} enabled={{ apache2.service_enabled }}

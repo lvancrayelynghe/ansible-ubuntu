@@ -1,0 +1,12 @@
+---
+
+apache2:
+  start: false
+  service_enabled: no
+  modules:
+    - deflate
+    - expires
+    - filter
+    - headers
+    - rewrite
+    - vhost_alias

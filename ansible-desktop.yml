@@ -6,6 +6,16 @@
     aptcachetime: 3600
     locale: "fr_FR.UTF-8"
     timezone: "Europe/Paris"
+    apache2:
+      start: false
+      service_enabled: no
+      modules:
+        - deflate
+        - expires
+        - filter
+        - headers
+        - rewrite
+        - vhost_alias
     beanstalkd:
       start: false
       service_enabled: no
@@ -42,6 +52,7 @@
     # - { role: locales, become: true }
     # - { role: common, become: true }
     # - { role: zsh, become: true }
+    # - { role: apache2, become: true }
     # - { role: python, become: true }
     # - { role: nodejs, become: true }
     # - { role: ruby, become: true }
