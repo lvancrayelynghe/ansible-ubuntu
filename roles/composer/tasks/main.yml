@@ -1,0 +1,31 @@
+---
+
+- name: Check Composer version
+  command: "composer --version"
+  register: composer_version
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Install Composer
+  shell: curl -sS https://getcomposer.org/installer | php && mv -f ./composer.phar /usr/local/bin/composer
+  args:
+    creates: /usr/local/bin/composer
+    warn: false
+  when: composer_version | failed
+
+- name: Count old composer archives
+  shell: ls {{ ansible_env.HOME }}/.composer/*-old.phar
+  register: files_to_cleanup
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Clean old composer archives
+  file: name={{item}} state=absent
+  with_items: files_to_cleanup.stdout_lines
+  when: files_to_cleanup.stdout_lines | count > 0
+
+- name: Upgrade Composer
+  shell: composer self-update
+  when: composer_version | success
