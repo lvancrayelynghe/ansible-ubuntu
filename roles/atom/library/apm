@@ -1,4 +1,8 @@
 #!/usr/bin/python
+#
+# Source : https://github.com/MichaelAquilina/ubuntu-ansible/blob/abafbeb78a524e002a178921dd9b6c0b16d949e2/library/apm
+# See also : https://github.com/hnakamur/ansible-role-atom-packages/blob/master/library/apm
+#
 
 import subprocess
 
