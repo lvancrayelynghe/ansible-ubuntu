@@ -35,8 +35,8 @@
   file: path=/usr/local/bin/phantomjs mode=0755
   when: phantomjs_version | failed
 
-- name: Cleanup PhantomJS installer
-  file: path=/tmp/download-phantomjs.tar.bz2 state=absent
+# - name: Cleanup PhantomJS installer
+#   file: path=/tmp/download-phantomjs.tar.bz2 state=absent
 
-- name: Cleanup PhantomJS installer
-  file: path="/tmp/{{ phantomjs.dir }}" state=absent
+# - name: Cleanup PhantomJS installer
+#   file: path="/tmp/{{ phantomjs.dir }}" state=absent

@@ -40,8 +40,8 @@
       start: false
       service_enabled: no
     phantomjs:
-      url: https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-i686.tar.bz2
-      dir: phantomjs-2.1.1-linux-i686
+      url: https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+      dir: phantomjs-2.1.1-linux-x86_64
     redis:
       start: false
       service_enabled: no
@@ -73,7 +73,7 @@
     # - { role: dotfiles, become: true}
     # - { role: desktop, become: true}
     # - { role: sublime3, become: true}
-    # - { role: phantomjs, become: true}
+    - { role: phantomjs, become: true}
     # - { role: gulp}
     # - { role: browsersync }
     # - { role: bower }
