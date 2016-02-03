@@ -1,0 +1,26 @@
+---
+
+- name: Check if TeamViewer is installed
+  command: dpkg-query -W teamviewer
+  register: teamviewer_check_deb
+  failed_when: teamviewer_check_deb.rc > 1
+  changed_when: teamviewer_check_deb.rc == 1
+
+- name: Install TeamViewer dependencies
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - libjpeg62
+    - libxinerama1
+    - libxrandr2
+    - libxtst6
+
+- name: Download TeamViewer
+  get_url: url="http://download.teamviewer.com/download/teamviewer_i386.deb" dest="/tmp/download-teamviewer-latest.deb"
+  when: teamviewer_check_deb.rc == 1
+
+- name: Install TeamViewer
+  apt: deb="/tmp/download-teamviewer-latest.deb"
+  when: teamviewer_check_deb.rc == 1
+
+- name: Clean TeamViewer deb file
+  file: path=/tmp/download-teamviewer-latest.deb state=absent
