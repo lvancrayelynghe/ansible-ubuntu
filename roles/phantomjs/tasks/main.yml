@@ -19,6 +19,13 @@
   failed_when: false
   changed_when: false
 
+- name: Cleanup PhantomJS existing installation
+  file: path="/usr/local/bin/phantomjs" state=absent
+  when: phantomjs_version | failed
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
 - name: Download PhantomJS archive
   get_url: url="{{ phantomjs.url }}" dest=/tmp/download-phantomjs.tar.bz2 force=no
   when: phantomjs_version | failed
