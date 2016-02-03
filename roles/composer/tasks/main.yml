@@ -14,6 +14,9 @@
     warn: false
   when: composer_version | failed
 
+- name: Make Composer executable
+  file: path=/usr/local/bin/composer mode=0755
+
 - name: Count old composer archives
   shell: ls {{ ansible_env.HOME }}/.composer/*-old.phar
   register: files_to_cleanup
