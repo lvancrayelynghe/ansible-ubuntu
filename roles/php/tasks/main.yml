@@ -52,6 +52,9 @@
   with_items :
     - { param: user, value: "{{ php5.run_as }}" }
     - { param: group, value: "{{ php5.run_as }}" }
+    - { param: listen.owner, value: "{{ php5.run_as }}" }
+    - { param: listen.group, value: "{{ php5.run_as }}" }
+    - { param: listen.mode, value: "0666" }
 
 - name: Configure PHP 7 settings
   lineinfile: dest=/etc/php/7.0/cli/php.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
@@ -80,6 +83,9 @@
   with_items :
     - { param: user, value: "{{ php7.run_as }}" }
     - { param: group, value: "{{ php7.run_as }}" }
+    - { param: listen.owner, value: "{{ php7.run_as }}" }
+    - { param: listen.group, value: "{{ php7.run_as }}" }
+    - { param: listen.mode, value: "0666" }
 
 - name: Configure PHP 5.6 and PHP 7.0 xdebug
   lineinfile: dest=/etc/php/mods-available/xdebug.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}" create=yes mode=0644
