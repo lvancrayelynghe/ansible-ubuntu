@@ -16,5 +16,11 @@
 - name: Remove default Apache2 vhosts
   file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
 
+- name: Configure Apache2 user and group
+  lineinfile: dest=/etc/apache2/envvars regexp="^export {{ item.param }}=" line="export {{ item.param }}={{ item.value }}"
+  with_items :
+    - { param: APACHE_RUN_USER, value: "{{ apache2.run_as }}" }
+    - { param: APACHE_RUN_GROUP, value: "{{ apache2.run_as }}" }
+
 - name: "Ensure Apache2 is {{ apache2.start | ternary('started','stopped') }}"
   service: name=apache2 state={{ apache2.start | ternary('restarted','stopped') }} enabled={{ apache2.service_enabled }}

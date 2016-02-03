@@ -9,6 +9,7 @@
     apache2:
       start: false
       service_enabled: no
+      run_as: www-data
       modules:
         - deflate
         - expires
