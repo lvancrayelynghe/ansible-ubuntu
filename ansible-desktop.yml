@@ -42,6 +42,14 @@
     phantomjs:
       url: https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
       dir: phantomjs-2.1.1-linux-x86_64
+    php5:
+      start: false
+      service_enabled: no
+      run_as: www-data
+    php7:
+      start: false
+      service_enabled: no
+      run_as: www-data
     redis:
       start: false
       service_enabled: no
@@ -56,6 +64,7 @@
     # - { role: common, become: true }
     # - { role: zsh, become: true }
     # - { role: apache2, become: true }
+    # - { role: php, become: true }
     # - { role: composer, become: true }
     # - { role: python, become: true }
     # - { role: nodejs, become: true }

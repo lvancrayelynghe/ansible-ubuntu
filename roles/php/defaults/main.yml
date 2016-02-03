@@ -1,0 +1,10 @@
+---
+
+php5:
+  start: false
+  service_enabled: no
+  run_as: www-data
+php7:
+  start: false
+  service_enabled: no
+  run_as: www-data

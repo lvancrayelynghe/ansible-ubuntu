@@ -1,0 +1,97 @@
+---
+- name: Add co-installable PHP 5.6 and PHP 7.0 to source list
+  apt_repository: repo="ppa:ondrej/php" state=present
+
+- name: Install PHP 5.6 and PHP 7.0
+  apt: name={{item}} state=latest
+  with_items:
+    - php5.6
+    - php7.0
+    - php5.6-fpm
+    - php7.0-fpm
+    - mcrypt
+    - openssl
+    - php-cli
+    - php-curl
+    - php-gd
+    - php-imagick
+    - php-intl
+    - php-json
+    - php-memcached
+    - php-redis
+    - php-xdebug
+    - php5.6-intl
+    - php5.6-curl
+    - php5.6-gd
+    - php5.6-mcrypt
+
+- name: Configure PHP 5.6 settings
+  lineinfile: dest=/etc/php/5.6/cli/php.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
+  with_items :
+    - { param: error_reporting, value: "E_ALL" }
+    - { param: display_errors, value: "On" }
+    - { param: post_max_size, value: "128M" }
+    - { param: upload_max_filesize, value: "128M" }
+    - { param: memory_limit, value: "128M" }
+    - { param: max_input_time, value: "30" }
+    - { param: max_execution_time, value: "30" }
+    - { param: short_open_tag, value: "Off" }
+    - { param: date.timezone , value: "Europe/Paris" }
+    - { param: cgi.fix_pathinfo , value: "0" }
+    - { param: phar.readonly , value: "Off" }
+    - { param: expose_php , value: "Off" }
+
+- name: Copy PHP 5.6 settings for Apache 2
+  copy: src=/etc/php/5.6/apache2/php.ini dest=/etc/php/5.6/apache2/php.ini
+
+- name: Copy PHP 5.6 settings for PHP-FPM
+  copy: src=/etc/php/5.6/apache2/php.ini dest=/etc/php/5.6/fpm/php.ini
+
+- name: Configure PHP 5.6 FPM settings
+  lineinfile: dest=/etc/php/5.6/fpm/pool.d/www.conf regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
+  with_items :
+    - { param: user, value: "{{ php5.run_as }}" }
+    - { param: group, value: "{{ php5.run_as }}" }
+
+- name: Configure PHP 7 settings
+  lineinfile: dest=/etc/php/7.0/cli/php.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
+  with_items :
+    - { param: error_reporting, value: "E_ALL" }
+    - { param: display_errors, value: "On" }
+    - { param: post_max_size, value: "128M" }
+    - { param: upload_max_filesize, value: "128M" }
+    - { param: memory_limit, value: "128M" }
+    - { param: max_input_time, value: "30" }
+    - { param: max_execution_time, value: "30" }
+    - { param: short_open_tag, value: "Off" }
+    - { param: date.timezone , value: "Europe/Paris" }
+    - { param: cgi.fix_pathinfo , value: "0" }
+    - { param: phar.readonly , value: "Off" }
+    - { param: expose_php , value: "Off" }
+
+- name: Copy PHP 7.0 settings for Apache 2
+  copy: src=/etc/php/7.0/apache2/php.ini dest=/etc/php/7.0/apache2/php.ini
+
+- name: Copy PHP 7.0 settings for PHP-FPM
+  copy: src=/etc/php/7.0/apache2/php.ini dest=/etc/php/7.0/fpm/php.ini
+
+- name: Configure PHP 7.0 FPM settings
+  lineinfile: dest=/etc/php/7.0/fpm/pool.d/www.conf regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
+  with_items :
+    - { param: user, value: "{{ php7.run_as }}" }
+    - { param: group, value: "{{ php7.run_as }}" }
+
+- name: Configure PHP 5.6 and PHP 7.0 xdebug
+  lineinfile: dest=/etc/php/mods-available/xdebug.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}" create=yes mode=0644
+  with_items :
+    - { param: xdebug.remote_enable, value: "0" }
+    - { param: xdebug.remote_handler, value: "dbgp" }
+    - { param: xdebug.remote_port , value: "9000" }
+    - { param: xdebug.remote_host , value: "localhost" }
+    - { param: xdebug.cli_color, value: "1" }
+
+- name: "Ensure PHP 5.6 FPM is {{ php5.start | ternary('started','stopped') }}"
+  service: name="php5.6-fpm" state={{ php5.start | ternary('restarted','stopped') }} enabled={{ php5.service_enabled }}
+
+- name: "Ensure PHP 7.0 FPM is {{ php7.start | ternary('started','stopped') }}"
+  service: name="php7.0-fpm" state={{ php7.start | ternary('restarted','stopped') }} enabled={{ php7.service_enabled }}
