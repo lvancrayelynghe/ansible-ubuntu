@@ -6,8 +6,14 @@
 - name: Install latest sublime package
   apt: pkg="sublime-text-installer" state=latest update_cache=yes
 
-- name: Prepare sublime directories
+- name: Prepare sublime directories (1/2)
   file: path="{{ ansible_env.HOME }}/.config/sublime-text-3/Installed Packages" state=directory owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
 
-- name: Install package control for sublime (REMEMBER TO RUN DOTFILES SYMLINKS TO AUTO INSTALL PACKAGES)
+- name: Prepare sublime directories (2/2)
+  file: path="{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User" state=directory owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
+
+- name: Install Package Control for sublime
   get_url: url="https://packagecontrol.io/Package%20Control.sublime-package" dest="{{ ansible_env.HOME }}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package"
+
+- name: Copy Package Control settings template for auto-install (REMEMBER TO RUN DOTFILES SYMLINKS FOR REAL AUTO INSTALL PACKAGES)
+  copy: src="Package Control.sublime-settings" dest="{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User/Package Control.sublime-settings" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"

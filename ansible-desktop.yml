@@ -73,7 +73,7 @@
     # - { role: dotfiles, become: true}
     # - { role: desktop, become: true}
     # - { role: sublime3, become: true}
-    - { role: phantomjs, become: true}
+    # - { role: phantomjs, become: true}
     # - { role: gulp}
     # - { role: browsersync }
     # - { role: bower }
