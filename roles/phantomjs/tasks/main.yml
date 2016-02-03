@@ -1,0 +1,42 @@
+---
+
+- name: Ensure PhantomJS native package is absent
+  apt: name=phantomjs state=absent purge=yes
+
+- name: Install PhantomJS dependencies
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - fontconfig
+    - libfontconfig1
+    - libssl1.0.0
+    - zlib1g
+    - lib32z1
+
+- name: Check PhantomJS version
+  command: "phantomjs --version"
+  register: phantomjs_version
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Download PhantomJS archive
+  get_url: url="{{ phantomjs.url }}" dest=/tmp/download-phantomjs.tar.bz2 force=no
+  when: phantomjs_version | failed
+
+- name: Extract PhantomJS archive
+  unarchive: src=/tmp/download-phantomjs.tar.bz2 dest=/tmp creates="/tmp/{{ phantomjs.dir }}"
+  when: phantomjs_version | failed
+
+- name: Install PhantomJS
+  command: mv /tmp/{{ phantomjs.dir }}/bin/phantomjs /usr/local/bin/phantomjs creates="/usr/local/bin/phantomjs" removes="/tmp/{{ phantomjs.dir }}/bin/phantomjs"
+  when: phantomjs_version | failed
+
+- name: Make PhantomJS executable
+  file: path=/usr/local/bin/phantomjs mode=0755
+  when: phantomjs_version | failed
+
+- name: Cleanup PhantomJS installer
+  file: path=/tmp/download-phantomjs.tar.bz2 state=absent
+
+- name: Cleanup PhantomJS installer
+  file: path="/tmp/{{ phantomjs.dir }}" state=absent
