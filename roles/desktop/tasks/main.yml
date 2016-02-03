@@ -9,7 +9,6 @@
 - name: Install common desktop packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
-    - guake
     - libnotify-bin
     - meld # Diff / merge tool
     - nautilus-compare
@@ -17,6 +16,8 @@
     - nautilus-image-manipulator
     - nautilus-open-terminal
     - nautilus-wipe
+    - rhythmbox
+    - tilda # lighter than guake
     - ubuntu-restricted-extras # MP3, Microsoft fonts, Flash plugin, LAME and DVD playback
     - vlc
     - xclip
