@@ -13,5 +13,11 @@
       - libgmp-dev
       - libmemcached-dev
 
+- name: Configure HHVM user and group
+  lineinfile: dest=/etc/default/hhvm regexp="^#?{{ item.param }}=" line='{{ item.param }}="{{ item.value }}"'
+  with_items :
+    - { param: RUN_AS_USER, value: "{{ hhvm.run_as }}" }
+    - { param: RUN_AS_GROUP, value: "{{ hhvm.run_as }}" }
+
 - name: "Ensure HHVM is {{ hhvm.start | ternary('started','stopped') }}"
   service: name=hhvm state={{ hhvm.start | ternary('restarted','stopped') }} enabled={{ hhvm.service_enabled }}
