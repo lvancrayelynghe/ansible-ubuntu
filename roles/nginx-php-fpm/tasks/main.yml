@@ -1,0 +1,31 @@
+---
+
+- name: Add nginx vhosts
+  template: src={{ item.template }}.j2 dest="/etc/nginx/conf.d/vhost-{{ item.vhost }}.conf"
+  with_items: vhosts
+  register: nginx_phpfpm_confs
+  notify: Restart nginx
+
+- name: Clean /etc/hosts file
+  replace: dest=/etc/hosts regexp=".* \# nginx vhost\n" replace=""
+
+- name: Build /etc/hosts file
+  lineinfile: dest=/etc/hosts regexp=".*{{ item.vhost }} \# nginx vhost$" line="127.0.0.1   {{ item.vhost }} {{ '#' }} nginx vhost" state=present
+  with_items: vhosts
+
+- name: List nginx vhosts
+  set_fact:
+    nginx_confs: "{{ nginx_phpfpm_confs.results|selectattr('dest', 'string')|map(attribute='dest')|list + nginx_phpfpm_confs.results|selectattr('path', 'string')|map(attribute='path')|select|list }}"
+  when: nginx_phpfpm_confs
+
+- name: List nginx configs
+  shell: ls -1 /etc/nginx/conf.d/vhost-*.conf
+  register: ls_contents
+  when: nginx_phpfpm_confs
+  failed_when: false
+  changed_when: false
+
+- name: Remove old confs
+  file: path="{{ item }}" state=absent
+  with_items: ls_contents.stdout_lines
+  when: nginx_phpfpm_confs and item not in nginx_confs

@@ -73,6 +73,14 @@
       version: "5.0"
     vagrant:
       version: "1.8.1"
+    vhosts:
+      - template: standard
+        vhost: "default70.dev"
+        path: "{{ ansible_env.HOME }}/projects/default-7.0"
+      - template: standard
+        vhost: "default56.dev"
+        path: "{{ ansible_env.HOME }}/projects/default-5.6"
+        php: "5.6"
   roles:
     # - { role: locales, become: true }
     # - { role: common, become: true }
@@ -94,6 +102,7 @@
     # - { role: elasticsearch, become: true }
     # - { role: fail2ban, become: true }
     # - { role: nginx, become: true }
+    # - { role: nginx-php-fpm, become: true }
     # - { role: hhvm, become: true }
     # - { role: php-pecl, become: true }
     # - { role: dotfiles, become: true}
