@@ -86,6 +86,7 @@
     # - { role: common, become: true }
     # - { role: zsh, become: true }
     # - { role: apache2, become: true }
+    # - { role: apache2-php, become: true }
     # - { role: php, become: true }
     # - { role: composer, become: true }
     # - { role: python, become: true }

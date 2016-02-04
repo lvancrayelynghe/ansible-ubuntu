@@ -1,0 +1,50 @@
+---
+
+- name: "Enable Apache2 PHP {{ (apache2_php.version == '7.0') | ternary('7.0','5.6') }} modules"
+  apache2_module: state=present name="php{{ (apache2_php.version == '7.0') | ternary('7.0','5.6') }}"
+
+- name: "Disable Apache2 PHP {{ (apache2_php.version != '7.0') | ternary('7.0','5.6') }} modules"
+  apache2_module: state=absent name="php{{ (apache2_php.version != '7.0') | ternary('7.0','5.6') }}"
+
+- name: Add Apache 2 vhosts
+  template: src={{ item.template }}.j2 dest="/etc/apache2/sites-available/vhost-{{ item.vhost }}.conf"
+  with_items: vhosts
+  register: apache2_php_confs
+
+- name: Clean Apache 2 vhosts
+  shell: "rm -f /etc/apache2/sites-enabled/vhost-*.conf"
+  args:
+    warn: false
+
+- name: Enable Apache 2 vhosts
+  shell: "a2ensite vhost-{{ item.vhost }}.conf"
+  with_items: vhosts
+  notify: Restart apache2
+
+- name: Clean /etc/hosts file
+  replace: dest=/etc/hosts regexp=".* \# apache2 vhost\n" replace=""
+
+- name: Build /etc/hosts file
+  lineinfile: dest=/etc/hosts regexp=".*{{ item.vhost }} \# apache2 vhost$" line="127.0.0.1   {{ item.vhost }} {{ '#' }} apache2 vhost" state=present
+  with_items: vhosts
+
+- name: List Apache 2 vhosts
+  set_fact:
+    apache2_confs: "{{ apache2_php_confs.results|selectattr('dest', 'string')|map(attribute='dest')|list + apache2_php_confs.results|selectattr('path', 'string')|map(attribute='path')|select|list }}"
+  when: apache2_php_confs
+
+- name: List Apache 2 configs
+  shell: ls -1 /etc/apache2/sites-available/vhost-*.conf
+  register: ls_contents
+  when: apache2_php_confs
+  failed_when: false
+  changed_when: false
+
+- name: Remove old confs
+  file: path="{{ item }}" state=absent
+  with_items: ls_contents.stdout_lines
+  when: apache2_php_confs and item not in apache2_confs
+  notify: Restart apache2
+
+- name: "Ensure Apache2 is {{ apache2.start | ternary('started','stopped') }}"
+  service: name=apache2 state={{ apache2.start | ternary('restarted','stopped') }} enabled={{ apache2.service_enabled }}

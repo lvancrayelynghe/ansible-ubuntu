@@ -1,0 +1,8 @@
+<VirtualHost *:{{ item.port | default ('80') }}>
+	DocumentRoot "{{ item.path }}/public"
+	ServerName {{ item.vhost }}
+	<Directory "{{ item.path }}/public">
+    	AllowOverride All
+    	Require all granted
+	</Directory>
+</VirtualHost>
