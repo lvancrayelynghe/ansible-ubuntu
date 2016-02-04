@@ -29,3 +29,6 @@
   file: path="{{ item }}" state=absent
   with_items: ls_contents.stdout_lines
   when: nginx_phpfpm_confs and item not in nginx_confs
+
+- name: "Ensure nginx is {{ nginx.start | ternary('started','stopped') }}"
+  service: name=nginx state={{ nginx.start | ternary('restarted','stopped') }} enabled={{ nginx.service_enabled }}
