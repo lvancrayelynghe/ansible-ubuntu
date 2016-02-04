@@ -9,6 +9,8 @@
     - php7.0
     - php5.6-fpm
     - php7.0-fpm
+    - php5.6-mysql
+    - php7.0-mysql
     - mcrypt
     - openssl
     - php-cli
@@ -42,10 +44,10 @@
     - { param: expose_php , value: "Off" }
 
 - name: Copy PHP 5.6 settings for Apache 2
-  copy: src=/etc/php/5.6/apache2/php.ini dest=/etc/php/5.6/apache2/php.ini
+  copy: src=/etc/php/5.6/cli/php.ini dest=/etc/php/5.6/apache2/php.ini
 
 - name: Copy PHP 5.6 settings for PHP-FPM
-  copy: src=/etc/php/5.6/apache2/php.ini dest=/etc/php/5.6/fpm/php.ini
+  copy: src=/etc/php/5.6/cli/php.ini dest=/etc/php/5.6/fpm/php.ini
 
 - name: Configure PHP 5.6 FPM settings
   lineinfile: dest=/etc/php/5.6/fpm/pool.d/www.conf regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
@@ -73,10 +75,10 @@
     - { param: expose_php , value: "Off" }
 
 - name: Copy PHP 7.0 settings for Apache 2
-  copy: src=/etc/php/7.0/apache2/php.ini dest=/etc/php/7.0/apache2/php.ini
+  copy: src=/etc/php/7.0/cli/php.ini dest=/etc/php/7.0/apache2/php.ini
 
 - name: Copy PHP 7.0 settings for PHP-FPM
-  copy: src=/etc/php/7.0/apache2/php.ini dest=/etc/php/7.0/fpm/php.ini
+  copy: src=/etc/php/7.0/cli/php.ini dest=/etc/php/7.0/fpm/php.ini
 
 - name: Configure PHP 7.0 FPM settings
   lineinfile: dest=/etc/php/7.0/fpm/pool.d/www.conf regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
