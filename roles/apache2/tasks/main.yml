@@ -16,6 +16,9 @@
 - name: Remove default Apache2 vhosts
   file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
 
+- name: Remove default Apache2 ssl vhosts
+  file: path=/etc/apache2/sites-enabled/default-ssl.conf state=absent
+
 - name: Configure Apache2 user and group
   lineinfile: dest=/etc/apache2/envvars regexp="^export {{ item.param }}=" line="export {{ item.param }}={{ item.value }}"
   with_items :
