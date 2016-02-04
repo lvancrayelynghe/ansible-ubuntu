@@ -41,6 +41,11 @@
     memcached:
       start: false
       service_enabled: no
+    mysql:
+      start: false
+      service_enabled: no
+      password: secret
+      bind_address: 127.0.0.1
     nginx:
       start: false
       service_enabled: no
@@ -85,6 +90,7 @@
     # - { role: memcached, become: true }
     # - { role: redis, become: true }
     # - { role: beanstalkd, become: true }
+    # - { role: mysql, become: true }
     # - { role: elasticsearch, become: true }
     # - { role: fail2ban, become: true }
     # - { role: nginx, become: true }
