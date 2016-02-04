@@ -52,6 +52,9 @@
       start: false
       service_enabled: no
       run_as: www-data
+    php_pecl:
+      extensions:
+        - mailparse-2.1.6
     redis:
       start: false
       service_enabled: no
@@ -81,6 +84,7 @@
     # - { role: elasticsearch, become: true }
     # - { role: fail2ban, become: true }
     # - { role: hhvm, become: true }
+    # - { role: php-pecl, become: true }
     # - { role: dotfiles, become: true}
     # - { role: desktop, become: true}
     # - { role: sublime3, become: true}

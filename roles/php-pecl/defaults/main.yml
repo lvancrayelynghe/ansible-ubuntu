@@ -1,0 +1,5 @@
+---
+
+php_pecl:
+  extensions:
+    - mailparse
