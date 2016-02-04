@@ -1,0 +1,25 @@
+---
+
+- name: Configure the nginx APT key
+  apt_key: url=http://nginx.org/keys/nginx_signing.key
+
+- name: Configure the nginx APT repositories
+  apt_repository: repo="deb http://nginx.org/packages/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
+
+- name: Install the nginx packages
+  apt: name=nginx state=latest
+
+- name: Remove the default configuration
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: Configure nginx user
+  lineinfile: dest=/etc/nginx/nginx.conf regexp="{{ item.param }} " line="{{ item.param }} {{ item.value }};"
+  with_items :
+    - { param: user, value: "{{ nginx.run_as }}" }
+    - { param: server_names_hash_bucket_size, value: "64" }
+
+- name: Copy fastcgi params
+  copy: src="fastcgi_params" dest="/etc/nginx/fastcgi_params"
+
+- name: "Ensure nginx is {{ nginx.start | ternary('started','stopped') }}"
+  service: name=nginx state={{ nginx.start | ternary('restarted','stopped') }} enabled={{ nginx.service_enabled }}

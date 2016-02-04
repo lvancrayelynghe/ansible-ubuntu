@@ -41,6 +41,10 @@
     memcached:
       start: false
       service_enabled: no
+    nginx:
+      start: true
+      service_enabled: yes
+      run_as: www-data
     phantomjs:
       url: https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
       dir: phantomjs-2.1.1-linux-x86_64
@@ -83,6 +87,7 @@
     # - { role: beanstalkd, become: true }
     # - { role: elasticsearch, become: true }
     # - { role: fail2ban, become: true }
+    # - { role: nginx, become: true }
     # - { role: hhvm, become: true }
     # - { role: php-pecl, become: true }
     # - { role: dotfiles, become: true}
