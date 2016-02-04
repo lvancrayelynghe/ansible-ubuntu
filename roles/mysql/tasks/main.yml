@@ -9,10 +9,20 @@
     - mytop
 
 - name: Configure MySQL Password Lifetime
-  mysql_variables: variable="{{ item.variable }}" value="{{ item.value }}"
-  with_items :
-    - { variable: default_password_lifetime, value: "0" }
-    - { variable: bind-address, value: "{{ mysql.bind_address }}" }
+  lineinfile: dest=/etc/mysql/my.cnf
+    regexp="default_password_lifetime\s*=.*"
+    line="default_password_lifetime = 0"
+    state=present
+
+- name: Configure MySQL listen IP address
+  lineinfile: dest=/etc/mysql/my.cnf
+    regexp="bind-address\s*=.*"
+    line="bind-address = {{ mysql.bind_address }}"
+    state=present
+    backrefs=yes
+
+- name: Ensure MySQL is started to change root password
+  service: name=mysql state=started
 
 - name: Set MySQL root user password
   mysql_user: name=root password={{ mysql.password }} host="{{ item }}" priv=*.*:ALL,GRANT state=present
