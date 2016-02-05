@@ -21,3 +21,9 @@
     - ubuntu-restricted-extras # MP3, Microsoft fonts, Flash plugin, LAME and DVD playback
     - vlc
     - xclip
+
+- name: Install common desktop packages if Ubuntu 16.04
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - fonts-hack-ttf
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
