@@ -96,7 +96,7 @@
     # - { role: apache2, become: true }
     # - { role: apache2-php, become: true }
     # - { role: beanstalkd, become: true }
-    # - { role: blackfire.io, become: true }
+    # - { role: blackfire, become: true }
     # - { role: composer, become: true }
     # - { role: elasticsearch, become: true }
     # - { role: exim, become: true }
