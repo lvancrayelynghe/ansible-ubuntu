@@ -122,6 +122,7 @@
     # - { role: firefox, become: true }
     # - { role: flatabulous, become: true }
     # - { role: libreoffice, become: true }
+    # - { role: mysql-workbench, become: true }
     # - { role: shutter, become: true }
     # - { role: skype, become: true }
     # - { role: sublime3, become: true }
