@@ -85,35 +85,52 @@
         path: "{{ ansible_env.HOME }}/projects/default-5.6"
         php: "5.6"
   roles:
+    # Common roles
     # - { role: locales, become: true }
     # - { role: common, become: true }
     # - { role: zsh, become: true }
+    # - { role: dotfiles, become: true }
+    # - { role: java-openjdk, become: true }
+    # - { role: phantomjs, become: true }
+    # Server roles
     # - { role: apache2, become: true }
     # - { role: apache2-php, become: true }
-    # - { role: php, become: true }
-    # - { role: blackfire, become: true }
-    # - { role: composer, become: true }
-    # - { role: python, become: true }
-    # - { role: nodejs, become: true }
-    # - { role: ruby, become: true }
-    # - { role: vagrant, become: true }
-    # - { role: java-openjdk, become: true }
-    # - { role: mailcatcher, become: true }
-    # - { role: exim, become: true }
-    # - { role: memcached, become: true }
-    # - { role: redis, become: true }
     # - { role: beanstalkd, become: true }
-    # - { role: mysql, become: true }
+    # - { role: blackfire.io, become: true }
+    # - { role: composer, become: true }
     # - { role: elasticsearch, become: true }
+    # - { role: exim, become: true }
     # - { role: fail2ban, become: true }
+    # - { role: hhvm, become: true }
+    # - { role: mailcatcher, become: true }
+    # - { role: memcached, become: true }
+    # - { role: mysql, become: true }
     # - { role: nginx, become: true }
     # - { role: nginx-php-fpm, become: true }
-    # - { role: hhvm, become: true }
+    # - { role: nodejs, become: true }
+    # - { role: php, become: true }
     # - { role: php-pecl, become: true }
-    # - { role: dotfiles, become: true}
-    # - { role: desktop, become: true}
-    # - { role: sublime3, become: true}
-    # - { role: phantomjs, become: true}
+    # - { role: python, become: true }
+    # - { role: redis, become: true }
+    # - { role: ruby, become: true }
+    # Desktop roles
+    # - { role: desktop, become: true }
+    # - { role: atom, become: true }
+    # - { role: chromium, become: true }
+    # - { role: dbeaver, become: true }
+    # - { role: filezilla, become: true }
+    # - { role: firefox, become: true }
+    # - { role: flatabulous, become: true }
+    # - { role: libreoffice, become: true }
+    # - { role: shutter, become: true }
+    # - { role: skype, become: true }
+    # - { role: sublime3, become: true }
+    # - { role: teamviewer, become: true }
+    # - { role: thunderbird, become: true }
+    # - { role: vagrant, become: true }
+    # - { role: virtualbox, become: true }
+    # - { role: xmind, become: true }
+    # User roles
     # - { role: gulp}
     # - { role: browsersync }
     # - { role: bower }
