@@ -1,0 +1,16 @@
+---
+
+- name: Add Blackfire.io apt key
+  apt_key: url=https://packagecloud.io/gpg.key state=present
+
+- name: Add Blackfire.io repository
+  apt_repository: repo='deb http://packages.blackfire.io/debian any main' state=present update_cache=yes
+
+- name: Install Blackfire.io
+  apt: pkg={{ item }} state=present
+  with_items:
+    - blackfire-agent
+    - blackfire-php
+
+- name: "Ensure Blackfire.io is {{ blackfire.start | ternary('started','stopped') }}"
+  service: name=blackfire-agent state={{ blackfire.start | ternary('restarted','stopped') }} enabled={{ blackfire.service_enabled }}

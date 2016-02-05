@@ -1,0 +1,4 @@
+---
+
+- name: Restart Blackfire.io
+  service: name=blackfire-agent state=restarted
