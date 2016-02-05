@@ -1,4 +1,30 @@
 ---
 
 - name: Install Chromium
-  apt: pkg=chromium-browser state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  apt:
+    name: chromium-browser
+    state: latest
+    update_cache: yes
+    cache_valid_time: {{ aptcachetime }}
+
+- name: Create Chromium extensions directory for all users
+  file:
+    path: /usr/share/chromium-browser/extensions
+    state: directory
+
+# See https://developer.chrome.com/extensions/external_extensions#preferences
+- name: Create Chromium JSON file to install extensions for all users
+  template:
+    src: chrome-extensions.json.j2
+    dest: "/usr/share/chromium-browser/extensions/{{ item }}.json"
+  with_items:
+    - cjpalhdlnbpafiamejdnhcphjbkeiagm # ublock
+    - bcjindcccaagfpapjjmafapmmgkkhgoa # JSON Formatter
+    - miefikpgahefdbcgoiicnmpbeeomffld # Blackfire Companion
+    - fjnbnpbmkenffdnngjfgmeleoegfcffe # Stylish
+    # - jbbplnpkjmmeebjpijfedlgcdilocofh # wave-evaluation-tool
+    # - idgpnmonknjnojddfkpgkljpfnnfcklj # ModHeader
+    # - jgbbilmfbammlbbhmmgaagdkbkepnijn # Cookie Inspector
+    # - dapjbgnjinbpoindlpdmhochffioedbn # builtwith-technology-prof
+    # - deoaddaobnieaecelinfdllcgdehimih # kimono
+    # - fhbjgbiflinjbdggehcddcbncdddomop # postman
