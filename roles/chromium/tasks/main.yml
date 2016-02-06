@@ -5,7 +5,7 @@
     name: chromium-browser
     state: latest
     update_cache: yes
-    cache_valid_time: {{ aptcachetime }}
+    cache_valid_time: "{{ aptcachetime }}"
 
 - name: Create Chromium extensions directory for all users
   file:
