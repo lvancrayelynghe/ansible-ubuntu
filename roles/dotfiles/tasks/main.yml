@@ -26,13 +26,19 @@
   command: git config --local user.email "benoth83@gmail.com"
   args:
     chdir: "{{ ansible_env.HOME }}/dotfiles/public"
+    warn: false
   when: public_dotfiles_create.changed
 
 - name: Configure repository
   command: git config --local user.name "Benoth"
   args:
     chdir: "{{ ansible_env.HOME }}/dotfiles/public"
+    warn: false
   when: public_dotfiles_create.changed
 
 - name: Create private dotfiles directory
   file: path="{{ ansible_env.HOME }}/dotfiles/private" state=directory
+
+- name: Fix dotfiles directory owner
+  file: path="{{ ansible_env.HOME }}/dotfiles" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}" recurse=yes
+
