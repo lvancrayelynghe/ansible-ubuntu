@@ -43,6 +43,9 @@
     - { param: phar.readonly , value: "Off" }
     - { param: expose_php , value: "Off" }
 
+- name: Check that Apache 2 PHP 5.6 settings directory exist
+  file: path=/etc/php/5.6/apache2 state=directory
+
 - name: Copy PHP 5.6 settings for Apache 2
   copy: src=/etc/php/5.6/cli/php.ini dest=/etc/php/5.6/apache2/php.ini
 
@@ -73,6 +76,9 @@
     - { param: cgi.fix_pathinfo , value: "0" }
     - { param: phar.readonly , value: "Off" }
     - { param: expose_php , value: "Off" }
+
+- name: Check that Apache 2 PHP 7.0 settings directory exist
+  file: path=/etc/php/7.0/apache2 state=directory
 
 - name: Copy PHP 7.0 settings for Apache 2
   copy: src=/etc/php/7.0/cli/php.ini dest=/etc/php/7.0/apache2/php.ini
