@@ -34,3 +34,9 @@
   become: true
   become_user: "{{ ansible_env.USER }}"
   changed_when: flatabulous_git.changed
+
+- name: Smaller icons size
+  command: "gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ icon-size 24"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: flatabulous_git.changed
