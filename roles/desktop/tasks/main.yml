@@ -19,6 +19,7 @@
     - rhythmbox
     - tilda # lighter than guake
     - ubuntu-restricted-extras # MP3, Microsoft fonts, Flash plugin, LAME and DVD playback
+    - unity-tweak-tool
     - vlc
     - xclip
 
@@ -56,6 +57,7 @@
     - gsettings set com.canonical.unity.webapps integration-allowed false
     - gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
     - gsettings set com.canonical.unity.webapps preauthorized-domains "[]"
+    - gsettings set com.canonical.Unity.ApplicationsLens display-available-apps false
 
 - name: Block Ubuntu product search in system host file
   lineinfile: dest=/etc/hosts regexp="^127\.0\.0\.1   productsearch.ubuntu.com$" line="127.0.0.1   productsearch.ubuntu.com" state=present

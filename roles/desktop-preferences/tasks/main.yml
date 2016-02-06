@@ -48,6 +48,8 @@
     - gsettings set com.canonical.Unity.Lenses remote-content-search 'none'
     - gsettings set org.gnome.desktop.background primary-color '#000000'
     - gsettings set org.gnome.desktop.session idle-delay "uint32 3600"
+    - gsettings set org.gnome.settings-daemon.plugins.xsettings hinting 'medium'
+    - gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'grayscale'
 
 - name: Set workspaces preferences
   command: "{{ item }}"
