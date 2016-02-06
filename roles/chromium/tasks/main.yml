@@ -7,6 +7,17 @@
     update_cache: yes
     cache_valid_time: "{{ aptcachetime }}"
 
+# See https://www.chromium.org/administrators/policy-list-3
+- name: Create Chromium policies directory for all users
+  file:
+    path: /etc/chromium/policies/managed
+    state: directory
+
+- name: Create Chromium JSON policy file to force settings for all users
+  copy:
+    src: policy.json
+    dest: "/etc/chromium/policies/managed/benoth-policy.json"
+
 - name: Create Chromium extensions directory for all users
   file:
     path: /usr/share/chromium-browser/extensions
