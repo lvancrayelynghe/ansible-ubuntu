@@ -27,3 +27,35 @@
   with_items:
     - fonts-hack-ttf
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
+
+- name: Remove Amazon and others Unity shits
+  apt: pkg={{ item }} purge=yes state=absent
+  with_items:
+    - unity-lens-shopping
+    - unity-scope-video-remote
+    - unity-scope-musicstores
+    - unity-scope-gdrive
+    - unity-scope-gmusicbrowser
+    - unity-scope-gourmet
+    - unity-scope-guayadeque
+    - unity-scope-musicstores
+    - unity-scope-musique
+    - unity-scope-googlenews
+    - unity-scope-launchpad
+    - unity-scope-onlinemusic
+    - unity-scope-yahoostock
+
+- name: Remove shitty Amazon shortcut
+  file: path=/usr/share/applications/ubuntu-amazon-default.desktop force=yes state=absent
+
+- name: Disable WebApps and other shitty integrations
+  command: "{{ item }}"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  with_items:
+    - gsettings set com.canonical.unity.webapps integration-allowed false
+    - gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
+    - gsettings set com.canonical.unity.webapps preauthorized-domains "[]"
+
+- name: Block Ubuntu product search in system host file
+  lineinfile: dest=/etc/hosts regexp="^127\.0\.0\.1   productsearch.ubuntu.com$" line="127.0.0.1   productsearch.ubuntu.com {{ '#' }}" state=present
