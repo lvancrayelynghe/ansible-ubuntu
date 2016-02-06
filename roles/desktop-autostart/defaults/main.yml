@@ -1,0 +1,12 @@
+---
+
+autostart:
+  add:
+    - { name: Tilda , exec: /usr/bin/tilda }
+  remove:
+    - telepathy-indicator.desktop
+    - deja-dup-monitor.desktop
+    - onboard-autostart.desktop
+    - orca-autostart.desktop
+    - vino-server.desktop
+    # - update-notifier.desktop

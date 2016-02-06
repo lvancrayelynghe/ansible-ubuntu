@@ -115,6 +115,7 @@
     # - { role: ruby, become: true }
     # Desktop roles
     # - { role: desktop, become: true }
+    # - { role: desktop-autostart, become: true }
     # - { role: atom, become: true }
     # - { role: chromium, become: true }
     # - { role: dbeaver, become: true }

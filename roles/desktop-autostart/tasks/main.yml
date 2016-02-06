@@ -1,0 +1,38 @@
+---
+
+- name: Unhide all startup applications
+  lineinfile:
+    dest: "{{ item }}"
+    regexp: '^NoDisplay='
+    line: 'NoDisplay=false'
+    state: present
+  with_fileglob:
+    - /etc/xdg/autostart/*
+
+- name: Create startup application directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/autostart"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+
+- name: Add new startup entries
+  template: src=desktop.j2 dest="{{ ansible_env.HOME }}/.config/autostart/{{ item.name | lower }}.desktop" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
+  with_items: autostart.add
+
+- name: Copy startup applications
+  copy:
+    src: "/etc/xdg/autostart/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/autostart/{{ item }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    force: no
+  with_items: autostart.remove
+
+- name: Disable startup applications
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.config/autostart/{{ item }}"
+    regexp: '^X-GNOME-Autostart-enabled='
+    line: 'X-GNOME-Autostart-enabled=false'
+    state: present
+  with_items: autostart.remove
