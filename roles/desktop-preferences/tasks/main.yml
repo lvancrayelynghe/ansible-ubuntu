@@ -83,3 +83,19 @@
     - gsettings set org.gnome.rhythmbox.player transition-time 1
     - gsettings set org.gnome.rhythmbox.sources visible-columns "['post-time', 'artist', 'duration', 'track-number', 'album', 'date']"
     - gsettings set org.gnome.rhythmbox.podcast download-interval 'daily'
+
+- name: Set Gedit preferences
+  command: "{{ item }}"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  with_items:
+    - gsettings set org.gnome.gedit.preferences.editor bracket-matching true
+    - gsettings set org.gnome.gedit.preferences.editor create-backup-copy false
+    - gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
+    - gsettings set org.gnome.gedit.preferences.editor editor-font 'Hack 10'
+    - gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
+    - gsettings set org.gnome.gedit.preferences.editor insert-spaces true
+    - gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
+    - gsettings set org.gnome.gedit.preferences.editor tabs-size "uint32 4"
+    - gsettings set org.gnome.gedit.preferences.editor use-default-font false
+    - gsettings set org.gnome.gedit.preferences.editor wrap-mode 'none'
