@@ -19,6 +19,7 @@
     dest: "/usr/share/chromium-browser/extensions/{{ item }}.json"
   with_items:
     - cjpalhdlnbpafiamejdnhcphjbkeiagm # ublock
+    - ajpgkpeckebdhofmmjfgcjjiiejpodla # Xmarks Bookmark Sync
     - bcjindcccaagfpapjjmafapmmgkkhgoa # JSON Formatter
     - miefikpgahefdbcgoiicnmpbeeomffld # Blackfire Companion
     - fjnbnpbmkenffdnngjfgmeleoegfcffe # Stylish
