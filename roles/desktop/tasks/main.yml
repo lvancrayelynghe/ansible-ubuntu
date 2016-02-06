@@ -58,4 +58,4 @@
     - gsettings set com.canonical.unity.webapps preauthorized-domains "[]"
 
 - name: Block Ubuntu product search in system host file
-  lineinfile: dest=/etc/hosts regexp="^127\.0\.0\.1   productsearch.ubuntu.com$" line="127.0.0.1   productsearch.ubuntu.com {{ '#' }}" state=present
+  lineinfile: dest=/etc/hosts regexp="^127\.0\.0\.1   productsearch.ubuntu.com$" line="127.0.0.1   productsearch.ubuntu.com" state=present
