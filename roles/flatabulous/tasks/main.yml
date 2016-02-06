@@ -19,12 +19,18 @@
 
 - name: Set GTK Icons to Ultra-Flat
   command: "gsettings set org.gnome.desktop.interface icon-theme Ultra-Flat"
-  when: ultra_flat_icons.changed
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: ultra_flat_icons.changed
 
 - name: Set GTK Theme to Flatabulous
   command: "gsettings set org.gnome.desktop.interface gtk-theme Flatabulous"
-  when: flatabulous_git.changed
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: flatabulous_git.changed
 
 - name: Set Windows Manager Theme to Flatabulous
   command: "gsettings set org.gnome.desktop.wm.preferences theme Flatabulous"
-  when: flatabulous_git.changed
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: flatabulous_git.changed
