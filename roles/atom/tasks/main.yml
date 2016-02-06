@@ -8,3 +8,5 @@
 
 - name: Setup Atom Packages
   apm: name=sync-settings # All others packages are managed by sync-settings
+  become: true
+  become_user: "{{ ansible_env.USER }}"

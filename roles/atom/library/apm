@@ -15,8 +15,9 @@ def get_installed(links=False):
         'apm', 'list', '--links={}'.format(links), '-i', '-b',
     ]).strip().split('\n')
     for line in output:
-        name, version = line.split('@')
-        packages[name] = version
+        if '@' in line:
+            name, version = line.split('@')
+            packages[name] = version
     return packages
 
 
