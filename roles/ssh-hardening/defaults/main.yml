@@ -1,0 +1,5 @@
+---
+
+ssh:
+  password_auth: false
+  root_login: false
