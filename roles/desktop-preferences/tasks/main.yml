@@ -44,7 +44,7 @@
   with_items:
     - gsettings set com.canonical.Unity.Lenses home-lens-default-view "['applications.scope']"
     - gsettings set com.canonical.Unity.Lenses always-search "['applications.scope']"
-    - gsettings set com.canonical.Unity form-factor 'Desktop'
+    - gsettings set com.canonical.Unity form-factor 'Netbook'
     - gsettings set com.canonical.Unity.Lenses remote-content-search 'none'
     - gsettings set org.gnome.desktop.background primary-color '#000000'
     - gsettings set org.gnome.desktop.session idle-delay "uint32 3600"
