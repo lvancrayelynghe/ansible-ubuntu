@@ -99,3 +99,14 @@
     - gsettings set org.gnome.gedit.preferences.editor tabs-size "uint32 4"
     - gsettings set org.gnome.gedit.preferences.editor use-default-font false
     - gsettings set org.gnome.gedit.preferences.editor wrap-mode 'none'
+
+- name: Set Calc preferences
+  command: "{{ item }}"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  with_items:
+    - gsettings set org.gnome.calculator accuracy 8
+    - gsettings set org.gnome.calculator button-mode 'advanced'
+    - gsettings set org.gnome.calculator number-format 'fixed'
+    - gsettings set org.gnome.calculator source-units 'EUR'
+    - gsettings set org.gnome.calculator target-units 'USD'
