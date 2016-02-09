@@ -1,0 +1,29 @@
+---
+
+- name: Installing PHP-CS-Fixer globally
+  get_url: url="http://get.sensiolabs.org/php-cs-fixer.phar" dest=/usr/local/bin/php-cs-fixer force=no mode=0755
+  when: php_phar_tools.php_cs_fixer
+
+- name: Installing PHP-Copy/Paste Detector globally
+  get_url: url="https://phar.phpunit.de/phpcpd.phar" dest=/usr/local/bin/phpcpd force=no mode=0755
+  when: php_phar_tools.phpcpd
+
+- name: Installing SAMI globally
+  get_url: url="http://get.sensiolabs.org/sami.phar" dest=/usr/local/bin/sami force=no mode=0755
+  when: php_phar_tools.sami
+
+- name: Installing Robo globally
+  get_url: url="http://robo.li/robo.phar" dest=/usr/local/bin/robo force=no mode=0755
+  when: php_phar_tools.robo
+
+- name: Installing PHP MD globally
+  get_url: url="http://static.phpmd.org/php/latest/phpmd.phar" dest=/usr/local/bin/phpmd force=no mode=0755
+  when: php_phar_tools.phpmd
+
+- name: Installing PHPUnit globally
+  get_url: url="https://phar.phpunit.de/phpunit.phar" dest=/usr/local/bin/phpunit force=no mode=0755
+  when: php_phar_tools.phpunit
+
+- name: Installing CSSPrites globally
+  get_url: url="http://benoth.github.io/phar/cssprites/cssprites.phar" dest=/usr/local/bin/cssprites force=no mode=0755
+  when: php_phar_tools.cssprites

@@ -1,0 +1,10 @@
+---
+
+php_phar_tools:
+  php_cs_fixer: true
+  phpcpd: true
+  sami: true
+  robo: true
+  phpmd: true
+  phpunit: true
+  cssprites: true
