@@ -1,0 +1,7 @@
+---
+
+- name: Configure the Wine PPA
+  apt_repository: repo="ppa:ubuntu-wine/ppa" state=present
+
+- name: Install Wine
+  apt: pkg=wine state=latest

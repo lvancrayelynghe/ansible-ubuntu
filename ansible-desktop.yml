@@ -144,6 +144,7 @@
     # - { role: thunderbird, become: true }
     # - { role: vagrant, become: true }
     # - { role: virtualbox, become: true }
+    # - { role: wine, become: true }
     # - { role: xmind, become: true }
     # User roles
     # - { role: gulp}
