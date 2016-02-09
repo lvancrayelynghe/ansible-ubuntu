@@ -11,6 +11,8 @@
     - php7.0-fpm
     - php5.6-mysql
     - php7.0-mysql
+    - php5.6-mcrypt
+    - php7.0-mcrypt
     - mcrypt
     - openssl
     - php-cli
@@ -25,7 +27,6 @@
     - php5.6-intl
     - php5.6-curl
     - php5.6-gd
-    - php5.6-mcrypt
 
 - name: Configure PHP 5.6 settings
   lineinfile: dest=/etc/php/5.6/cli/php.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}"
