@@ -130,10 +130,12 @@
     # - { role: desktop-preferences, become: true }
     # - { role: atom, become: true }
     # - { role: chromium, become: true }
+    # - { role: claws-mail, become: true }
     # - { role: dbeaver, become: true }
     # - { role: filezilla, become: true }
     # - { role: firefox, become: true }
     # - { role: flatabulous, become: true }
+    # - { role: geary, become: true }
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }
     # - { role: notepadqq, become: true }
