@@ -32,6 +32,7 @@
     - htop
     - httping
     - iftop
+    - imagemagick
     - iotop
     - less
     - make
@@ -42,6 +43,7 @@
     - p7zip
     - pv
     - pwgen
+    - rar
     - rsync
     - smbclient
     - software-properties-common
