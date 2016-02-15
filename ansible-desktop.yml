@@ -130,10 +130,12 @@
     # - { role: desktop-preferences, become: true }
     # - { role: atom, become: true }
     # - { role: chromium, become: true }
+    # - { role: claws-mail, become: true }
     # - { role: dbeaver, become: true }
     # - { role: filezilla, become: true }
     # - { role: firefox, become: true }
     # - { role: flatabulous, become: true }
+    # - { role: geary, become: true }
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }
     # - { role: notepadqq, become: true }
@@ -144,6 +146,8 @@
     # - { role: thunderbird, become: true }
     # - { role: vagrant, become: true }
     # - { role: virtualbox, become: true }
+    # - { role: vokoscreen, become: true }
+    # - { role: wine, become: true }
     # - { role: xmind, become: true }
     # User roles
     # - { role: gulp}

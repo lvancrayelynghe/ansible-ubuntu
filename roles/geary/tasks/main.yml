@@ -1,0 +1,7 @@
+---
+
+- name: Configure the Geary PPA
+  apt_repository: repo="ppa:yorba/ppa" state=present
+
+- name: Install Geary
+  apt: pkg="geary" state=latest
