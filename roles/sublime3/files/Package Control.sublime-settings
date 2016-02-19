@@ -9,11 +9,11 @@
 		"BracketHighlighter",
 		"DocBlockr",
 		"Emmet",
+        "EditorConfig",
 		"GitGutter",
 		"GotoDocumentation",
 		"INI",
 		"Laravel Blade Highlighter",
-		"LiveStyle",
 		"Markdown Preview",
 		"One Dark Color Scheme",
 		"One Dark Material - Theme",
@@ -21,6 +21,7 @@
 		"QML",
 		"SCSS",
 		"StringUtilities",
+        "Terminal",
 		"TrailingSpaces"
 	]
 }
