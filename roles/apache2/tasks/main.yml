@@ -1,7 +1,7 @@
 ---
 
 - name: Install Apache2
-  apt: pkg=apache2 state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
     - apache2
     - apache2-mpm-prefork
