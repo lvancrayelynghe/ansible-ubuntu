@@ -23,6 +23,9 @@
     blackfire:
       start: false
       service_enabled: no
+    chromium:
+      policy: false
+      extensions: false
     elasticsearch:
       start: false
       service_enabled: no

@@ -12,16 +12,19 @@
   file:
     path: /etc/chromium/policies/managed
     state: directory
+  when: chromium.policy
 
 - name: Create Chromium JSON policy file to force settings for all users
   copy:
     src: policy.json
     dest: "/etc/chromium/policies/managed/benoth-policy.json"
+  when: chromium.policy
 
 - name: Create Chromium extensions directory for all users
   file:
     path: /usr/share/chromium-browser/extensions
     state: directory
+  when: chromium.policy
 
 # See https://developer.chrome.com/extensions/external_extensions#preferences
 - name: Create Chromium JSON file to install extensions for all users
@@ -40,3 +43,4 @@
     # - dapjbgnjinbpoindlpdmhochffioedbn # builtwith-technology-prof
     # - deoaddaobnieaecelinfdllcgdehimih # kimono
     # - fhbjgbiflinjbdggehcddcbncdddomop # postman
+  when: chromium.extensions
