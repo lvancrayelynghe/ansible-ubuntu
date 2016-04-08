@@ -5,7 +5,7 @@ autostart:
     - { name: Tilda , exec: /usr/bin/tilda }
     - { name: AppStarter , exec: "{{ ansible_env.HOME }}/bin/app-starter" }
   remove:
-    - telepathy-indicator.desktop
+    # - telepathy-indicator.desktop
     - deja-dup-monitor.desktop
     - onboard-autostart.desktop
     - orca-autostart.desktop
