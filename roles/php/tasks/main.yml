@@ -96,8 +96,17 @@
     - { param: listen.group, value: "{{ php7.run_as }}" }
     - { param: listen.mode, value: "0666" }
 
-- name: Configure PHP 5.6 and PHP 7.0 xdebug
-  lineinfile: dest=/etc/php/mods-available/xdebug.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}" create=yes mode=0644
+- name: Configure PHP 5.6 xdebug
+  lineinfile: dest=/etc/php/5.6/mods-available/xdebug.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}" create=yes mode=0644
+  with_items :
+    - { param: xdebug.remote_enable, value: "0" }
+    - { param: xdebug.remote_handler, value: "dbgp" }
+    - { param: xdebug.remote_port , value: "9000" }
+    - { param: xdebug.remote_host , value: "localhost" }
+    - { param: xdebug.cli_color, value: "1" }
+
+- name: Configure PHP 7.0 xdebug
+  lineinfile: dest=/etc/php/7.0/mods-available/xdebug.ini regexp="^{{ item.param }} =" line="{{ item.param }} = {{ item.value }}" create=yes mode=0644
   with_items :
     - { param: xdebug.remote_enable, value: "0" }
     - { param: xdebug.remote_handler, value: "dbgp" }
