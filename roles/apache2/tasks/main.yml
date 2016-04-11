@@ -4,10 +4,15 @@
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
     - apache2
-    - apache2-mpm-prefork
-    - apache2-mpm-worker
     - apache2-utils
     - apachetop
+
+- name: Install Apache2 mpms
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - apache2-mpm-prefork
+    - apache2-mpm-worker
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
 
 - name: Enable Apache2 modules
   apache2_module: state=present name={{ item }}
