@@ -1,7 +1,7 @@
 ---
 
 - name: Configure locales
-  lineinfile: dest=/var/lib/locales/supported.d/local regexp="{{ item }}" line="{{ item }}"
+  lineinfile: dest=/var/lib/locales/supported.d/local regexp="{{ item }}" line="{{ item }}" create="yes"
   notify:
     - Generate locales
   with_items:
