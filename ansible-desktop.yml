@@ -103,7 +103,6 @@
     # - { role: dotfiles, become: true }
     # - { role: java-openjdk, become: true }
     # - { role: phantomjs, become: true }
-    # - { role: ssh-hardening, become: true }
     # Server roles
     # - { role: apache2, become: true }
     # - { role: apache2-php, become: true }
@@ -127,6 +126,7 @@
     # - { role: python, become: true }
     # - { role: redis, become: true }
     # - { role: ruby, become: true }
+    # - { role: ssh-hardening, become: true }
     # Desktop roles
     # - { role: desktop, become: true }
     # - { role: desktop-autostart, become: true }
