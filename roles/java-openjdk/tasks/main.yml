@@ -1,7 +1,7 @@
 ---
 
-- name: Install OpenJDK 7
+- name: Install Default OpenJDK
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
-    - openjdk-7-jdk
-    - openjdk-7-jre-headless
+    - default-jdk
+    - default-jre-headless
