@@ -1,0 +1,19 @@
+---
+
+- name: Check if Remarkable is installed
+  command: dpkg-query -W remarkable
+  register: remarkable_check_deb
+  failed_when: remarkable_check_deb.rc > 1
+  changed_when: remarkable_check_deb.rc == 1
+
+- name: Download Remarkable {{ remarkable.version }}
+  get_url: url="https://remarkableapp.github.io/files/remarkable_{{ remarkable.version }}_all.deb" dest="/tmp/download-remarkable-latest.deb"
+  when: remarkable_check_deb.rc == 1
+
+- name: Install Remarkable {{ remarkable.version }}
+  apt: deb="/tmp/download-remarkable-latest.deb"
+  when: remarkable_check_deb.rc == 1
+
+- name: Clean Remarkable deb file
+  file: path=/tmp/download-remarkable-latest.deb state=absent
+

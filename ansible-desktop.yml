@@ -78,6 +78,8 @@
       phpmd: true
       phpunit: true
       cssprites: true
+    remarkable:
+      version: "1.62"
     redis:
       start: false
       service_enabled: no
@@ -142,6 +144,7 @@
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }
     # - { role: notepadqq, become: true }
+    # - { role: remarkable, become: true }
     # - { role: shutter, become: true }
     # - { role: skype, become: true }
     # - { role: sublime3, become: true }
