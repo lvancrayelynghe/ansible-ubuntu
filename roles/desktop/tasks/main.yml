@@ -22,6 +22,8 @@
     - pinta # light paint.net equivalent
     - ubuntu-restricted-extras # MP3, Microsoft fonts, Flash plugin, LAME and DVD playback
     - unity-tweak-tool
+    - unetbootin # create bootable USB drives
+    - easytag # audio files metadata management
     - vlc
     - xclip
 
