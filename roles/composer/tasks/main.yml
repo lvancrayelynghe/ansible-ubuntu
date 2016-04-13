@@ -31,4 +31,6 @@
 
 - name: Upgrade Composer
   shell: composer self-update
+  ignore_errors: true
+  failed_when: false
   when: composer_version | success
