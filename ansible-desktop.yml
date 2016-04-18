@@ -145,6 +145,7 @@
     # - { role: mysql-workbench, become: true }
     # - { role: notepadqq, become: true }
     # - { role: remarkable, become: true }
+    # - { role: remmina, become: true }
     # - { role: shutter, become: true }
     # - { role: skype, become: true }
     # - { role: sublime3, become: true }
