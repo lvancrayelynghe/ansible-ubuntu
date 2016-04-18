@@ -1,0 +1,11 @@
+---
+
+- name: Set npm global packages path
+  command: npm config set prefix "{{ ansible_env.HOME }}/.npm-packages"
+  changed_when: false
+
+- name: Installs webpack globally using npm
+  npm: name={{item}} state=present global=yes
+  with_items:
+    - webpack
+    - webpack-dev-server
