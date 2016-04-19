@@ -15,6 +15,8 @@
     - php7.0-mysql
     - php5.6-mcrypt
     - php7.0-mcrypt
+    - php5.6-mbstring
+    - php7.0-mbstring
     - php5.6-json
     - php7.0-json
     - php5.6-curl
@@ -25,8 +27,8 @@
     - php7.0-intl
     - php5.6-cli
     - php7.0-cli
-    - php5.6-mysql
-    - php7.0-mysql
+    - php5.6-xml
+    - php7.0-xml
     - mcrypt
     - openssl
     - php-imagick
