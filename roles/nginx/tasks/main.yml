@@ -2,9 +2,11 @@
 
 - name: Configure the nginx APT key
   apt_key: url=http://nginx.org/keys/nginx_signing.key
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
 
 - name: Configure the nginx APT repositories
   apt_repository: repo="deb http://nginx.org/packages/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
 
 - name: Install the nginx packages
   apt: name=nginx state=latest
