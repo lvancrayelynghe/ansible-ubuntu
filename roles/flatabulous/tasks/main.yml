@@ -1,11 +1,5 @@
 ---
 
-- name: Configure the Ubuntu tweak tool APT repositories
-  apt_repository: repo="ppa:tualatrix/ppa" state=present
-
-- name: Install Ubuntu tweak tool
-  apt: pkg=ubuntu-tweak state=latest
-
 - name: Configure the Ultra flat icons APT repositories
   apt_repository: repo="ppa:noobslab/icons" state=present
 
