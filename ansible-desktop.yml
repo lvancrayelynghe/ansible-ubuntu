@@ -114,7 +114,6 @@
     # - { role: elasticsearch, become: true }
     # - { role: exim, become: true }
     # - { role: fail2ban, become: true }
-    # - { role: grub-customizer, become: true }
     # - { role: hhvm, become: true }
     # - { role: mailcatcher, become: true }
     # - { role: memcached, become: true }
@@ -141,6 +140,7 @@
     # - { role: firefox, become: true }
     # - { role: flatabulous, become: true }
     # - { role: geary, become: true }
+    # - { role: grub-customizer, become: true }
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }
     # - { role: notepadqq, become: true }
