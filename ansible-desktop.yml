@@ -143,6 +143,7 @@
     # - { role: grub-customizer, become: true }
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }
+    # - { role: nemo, become: true }
     # - { role: notepadqq, become: true }
     # - { role: remarkable, become: true }
     # - { role: remmina, become: true }

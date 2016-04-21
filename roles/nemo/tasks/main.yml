@@ -1,0 +1,28 @@
+---
+
+- name: Configure the Nemo PPA
+  apt_repository: repo="ppa:webupd8team/nemo" state=present
+
+- name: Install Nemo
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - nemo
+
+- name: Set Nemo preferences
+  command: "{{ item }}"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  with_items:
+    - gsettings set org.nemo.window-state side-pane-view 'tree'
+    - gsettings set org.nemo.preferences default-folder-viewer 'list-view'
+    - gsettings set org.nemo.preferences show-computer-icon-toolbar true
+    - gsettings set org.nemo.preferences show-home-icon-toolbar true
+    - gsettings set org.nemo.preferences show-up-icon-toolbar false
+    - gsettings set org.nemo.preferences show-new-folder-icon-toolbar true
+    - gsettings set org.nemo.preferences show-reload-icon-toolbar true
+    - gsettings set org.nemo.preferences show-open-in-terminal-toolbar true
+    - gsettings set org.nemo.preferences show-previous-icon-toolbar false
+    - gsettings set org.nemo.preferences show-next-icon-toolbar false
+    - gsettings set org.nemo.window-state side-pane-view 'tree'
+    - gsettings set org.nemo.list-view default-visible-columns "['name', 'size', 'type', 'date_modified', 'permissions']"
+    - gsettings set org.nemo.list-view default-column-order "['name', 'size', 'type', 'date_modified', 'date_accessed', 'where', 'group', 'permissions', 'octal_permissions', 'owner', 'mime_type', 'detailed_type']"
