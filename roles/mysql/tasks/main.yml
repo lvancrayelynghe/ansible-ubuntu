@@ -5,6 +5,18 @@
   with_items:
     - mysql-server-5.6
     - mysql-client-5.6
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
+
+- name: Install MySQL
+  apt: pkg=mysql state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - mysql-server-5.7
+    - mysql-client-5.7
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
+
+- name: Install MySQL
+  apt: pkg=mysql state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
     - python-mysqldb
     - mytop
 
@@ -13,6 +25,7 @@
     regexp="default_password_lifetime\s*=.*"
     line="default_password_lifetime = 0"
     state=present
+    backrefs=yes
 
 - name: Configure MySQL listen IP address
   lineinfile: dest=/etc/mysql/my.cnf
