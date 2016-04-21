@@ -1,0 +1,25 @@
+---
+
+- name: Create projects-installer directory
+  file: path="{{ ansible_env.HOME }}/projects/perso" state=directory
+  register: projects_directory_create
+
+- name: Clone projects-installer repository
+  git: repo=https://github.com/Benoth/projects-installer.git dest="{{ ansible_env.HOME }}/projects/perso/projects-installer" update=yes accept_hostkey=yes
+
+- name: Configure repository
+  command: git config --local user.email "benoth83@gmail.com"
+  args:
+    chdir: "{{ ansible_env.HOME }}/projects/perso/projects-installer"
+    warn: false
+  when: projects_directory_create.changed
+
+- name: Configure repository
+  command: git config --local user.name "Benoth"
+  args:
+    chdir: "{{ ansible_env.HOME }}/projects/perso/projects-installer"
+    warn: false
+  when: projects_directory_create.changed
+
+- name: Fix projects-installer directory owner
+  file: path="{{ ansible_env.HOME }}/projects/perso/projects-installer" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}" recurse=yes

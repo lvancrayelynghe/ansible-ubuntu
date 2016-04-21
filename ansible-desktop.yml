@@ -105,6 +105,7 @@
     # - { role: dotfiles, become: true }
     # - { role: java-openjdk, become: true }
     # - { role: phantomjs, become: true }
+    # - { role: projects-installer }
     # Server roles
     # - { role: apache2, become: true }
     # - { role: apache2-php, become: true }
