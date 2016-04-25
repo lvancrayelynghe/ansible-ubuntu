@@ -9,6 +9,7 @@
 - name: Install common desktop packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
+    - bleachbit
     - geany
     - libnotify-bin
     - meld # Diff / merge tool
@@ -16,6 +17,7 @@
     - nautilus-image-converter
     - nautilus-image-manipulator
     - nautilus-wipe
+    - mpv
     - rhythmbox
     - tilda # lighter than guake
     - pinta # light paint.net equivalent
