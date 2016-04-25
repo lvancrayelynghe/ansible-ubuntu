@@ -1,0 +1,7 @@
+---
+
+- name: Add AltYo repository
+  apt_repository: repo="ppa:linvinus/altyo" state=present
+
+- name: Install AltYo
+  apt: name=altyo state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
