@@ -1,0 +1,7 @@
+---
+
+- name: Add Albert repository
+  apt_repository: repo="ppa:nilarimogard/webupd8" state=present
+
+- name: Install Albert
+  apt: name=albert state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
