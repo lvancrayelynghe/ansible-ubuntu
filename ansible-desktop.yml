@@ -132,7 +132,7 @@
     # Desktop roles
     # - { role: desktop, become: true }
     # - { role: desktop-autostart, become: true }
-    # - { role: desktop-preferences, become: true }
+    # - { role: desktop-preferences }
     # - { role: albert, become: true }
     # - { role: atom, become: true }
     # - { role: chromium, become: true }
