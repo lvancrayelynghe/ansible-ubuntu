@@ -1,0 +1,49 @@
+---
+
+- name: Add Ubuntu 14.04 repositories
+  lineinfile:
+    dest: "/etc/apt/sources.list"
+    regexp: "^deb http://fr.archive.ubuntu.com/ubuntu trusty main restricted universe multiverse$"
+    line: "deb http://fr.archive.ubuntu.com/ubuntu trusty main restricted universe multiverse"
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
+
+- name: Install MySQL 5.6
+  apt: pkg=mysql state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - mysql-server-5.6
+    - mysql-client-5.6
+    - python-mysqldb
+    - mytop
+
+- name: Configure MySQL Password Lifetime
+  lineinfile: dest=/etc/mysql/my.cnf
+    regexp="default_password_lifetime\s*=.*"
+    line="default_password_lifetime = 0"
+    state=present
+    backrefs=yes
+
+- name: Configure MySQL listen IP address
+  lineinfile: dest=/etc/mysql/my.cnf
+    regexp="bind-address\s*=.*"
+    line="bind-address = {{ mysql.bind_address }}"
+    state=present
+    backrefs=yes
+
+- name: Ensure MySQL is started to change root password
+  service: name=mysql state=started
+
+- name: Set MySQL root user password
+  mysql_user: name=root password={{ mysql.password }} host="{{ item }}" priv=*.*:ALL,GRANT state=present
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: Configure MySQL for easy access as root user
+  action: template src=root.my.cnf.j2 dest=/root/.my.cnf mode=0600
+
+- name: Remove the MySQL test database
+  mysql_db: db=test state=absent login_user=root login_password={{ mysql.password }}
+
+- name: "Ensure MySQL is {{ mysql.start | ternary('started','stopped') }}"
+  service: name=mysql state={{ mysql.start | ternary('restarted','stopped') }} enabled={{ mysql.service_enabled }}

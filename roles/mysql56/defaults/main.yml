@@ -1,0 +1,7 @@
+---
+
+mysql:
+  start: false
+  service_enabled: no
+  password: secret
+  bind_address: 127.0.0.1

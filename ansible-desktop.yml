@@ -118,7 +118,8 @@
     # - { role: hhvm, become: true }
     # - { role: mailcatcher, become: true }
     # - { role: memcached, become: true }
-    # - { role: mysql, become: true }
+    # - { role: mysql57, become: true }
+    # - { role: mysql56, become: true }
     # - { role: nginx, become: true }
     # - { role: nginx-php-fpm, become: true }
     # - { role: nodejs, become: true }
