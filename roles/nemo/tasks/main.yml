@@ -27,3 +27,5 @@
     - gsettings set org.nemo.window-state side-pane-view 'tree'
     - gsettings set org.nemo.list-view default-visible-columns "['name', 'size', 'type', 'date_modified', 'permissions']"
     - gsettings set org.nemo.list-view default-column-order "['name', 'size', 'type', 'date_modified', 'date_accessed', 'where', 'group', 'permissions', 'octal_permissions', 'owner', 'mime_type', 'detailed_type']"
+    - gsettings set org.gnome.desktop.background show-desktop-icons false
+    - xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
