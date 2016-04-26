@@ -3,22 +3,11 @@
 - name: Install MySQL
   apt: pkg=mysql state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
-    - mysql-server-5.6
-    - mysql-client-5.6
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
-
-- name: Install MySQL
-  apt: pkg=mysql state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  with_items:
     - mysql-server-5.7
     - mysql-client-5.7
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
-
-- name: Install MySQL
-  apt: pkg=mysql state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  with_items:
     - python-mysqldb
     - mytop
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: Configure MySQL Password Lifetime
   lineinfile: dest=/etc/mysql/my.cnf
@@ -26,6 +15,7 @@
     line="default_password_lifetime = 0"
     state=present
     backrefs=yes
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: Configure MySQL listen IP address
   lineinfile: dest=/etc/mysql/my.cnf
@@ -33,9 +23,11 @@
     line="bind-address = {{ mysql.bind_address }}"
     state=present
     backrefs=yes
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: Ensure MySQL is started to change root password
   service: name=mysql state=started
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: Set MySQL root user password
   mysql_user: name=root password={{ mysql.password }} host="{{ item }}" priv=*.*:ALL,GRANT state=present
@@ -43,12 +35,16 @@
     - 127.0.0.1
     - ::1
     - localhost
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: Configure MySQL for easy access as root user
   action: template src=root.my.cnf.j2 dest=/root/.my.cnf mode=0600
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: Remove the MySQL test database
   mysql_db: db=test state=absent login_user=root login_password={{ mysql.password }}
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: "Ensure MySQL is {{ mysql.start | ternary('started','stopped') }}"
   service: name=mysql state={{ mysql.start | ternary('restarted','stopped') }} enabled={{ mysql.service_enabled }}
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
