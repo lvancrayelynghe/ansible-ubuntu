@@ -143,6 +143,7 @@
     # - { role: firefox, become: true }
     # - { role: flatabulous, become: true }
     # - { role: geary, become: true }
+    # - { role: gimp, become: true }
     # - { role: grub-customizer, become: true }
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }

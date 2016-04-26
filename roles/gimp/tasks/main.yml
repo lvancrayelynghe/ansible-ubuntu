@@ -1,0 +1,18 @@
+---
+
+- name: Install Gimp
+  apt:
+    name: gimp
+
+- name: Add Gimp configs
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.gimp-2.8/sessionrc"
+    regexp: "{{ item.param }}"
+    line: "{{ item.value }}"
+    create: true
+  with_items :
+    - { param: "single-window-mode", value: "(single-window-mode yes)" }
+    - { param: "default-snap-to-canvas", value: "(default-snap-to-canvas yes)" }
+    - { param: "default-snap-to-grid", value: "(default-snap-to-grid yes)" }
+  become: true
+  become_user: "{{ ansible_env.USER }}"
