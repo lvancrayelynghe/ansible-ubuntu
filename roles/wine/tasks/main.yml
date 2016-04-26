@@ -5,3 +5,7 @@
 
 - name: Install Wine
   apt: pkg=wine state=latest
+
+- name: HeidiSQL installation instructions
+  debug:
+    msg: "*** To install HeidiSQL, see http://askubuntu.com/a/459075 ***"
