@@ -146,6 +146,7 @@
     # - { role: geary, become: true }
     # - { role: gimp, become: true }
     # - { role: grub-customizer, become: true }
+    # - { role: indicator-sysmonitor, become: true }
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }
     # - { role: nemo, become: true }

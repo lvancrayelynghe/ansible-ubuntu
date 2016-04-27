@@ -1,0 +1,7 @@
+---
+
+- name: Configure the Indicator-SysMonitor PPA
+  apt_repository: repo="ppa:fossfreedom/indicator-sysmonitor" state=present
+
+- name: Install Indicator-SysMonitor
+  apt: pkg=indicator-sysmonitor state=latest
