@@ -29,6 +29,7 @@
     - xclip
     - wmctrl # to control windows
     - xdotool # to control windows
+    - sox
 
 - name: Install common desktop packages if Ubuntu 14.04
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
