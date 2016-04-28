@@ -6,5 +6,11 @@
 - name: Make ZSH default shell for user root
   user: name=root shell=/bin/zsh
 
+- name: Copy default ZSH config for user root
+  copy: src="zshrc" dest="/root/.zshrc" owner="root" group="root" force=yes
+
 - name: "Make ZSH default shell for user {{ ansible_env.USER }}"
   user: name={{ ansible_env.USER }} shell=/bin/zsh
+
+- name: "Copy default ZSH config for user {{ ansible_env.USER }}"
+  copy: src="zshrc" dest="{{ ansible_env.HOME }}/.zshrc" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}" force=no
