@@ -75,3 +75,9 @@
 
 - name: Block Ubuntu product search in system host file
   lineinfile: dest=/etc/hosts regexp="^127\.0\.0\.1   productsearch.ubuntu.com$" line="127.0.0.1   productsearch.ubuntu.com" state=present
+
+- name: Ensure that lightdm configuration directory exists
+  file: path=/etc/lightdm/lightdm.conf.d state=directory
+
+- name: Disable guest session in lightdm
+  copy: src="50-no-guest.conf" dest="/etc/lightdm/lightdm.conf.d/50-no-guest.conf" force=no
