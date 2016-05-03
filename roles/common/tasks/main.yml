@@ -25,6 +25,7 @@
     - diffutils
     - dos2unix
     - ftp-ssl
+    - gawk
     - gcc
     - git
     - grep
