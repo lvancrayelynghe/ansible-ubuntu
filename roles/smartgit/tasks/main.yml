@@ -1,0 +1,7 @@
+---
+
+- name: Configure the EugeneSan PPA
+  apt_repository: repo="ppa:eugenesan/ppa" state=present
+
+- name: Install SmartGit
+  apt: pkg=smartgit state=latest
