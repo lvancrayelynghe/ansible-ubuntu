@@ -26,12 +26,14 @@
   register: arc_theme_configure
   become: true
   become_user: "{{ ansible_env.USER }}"
+  when: arc_theme_git.changed
 
 - name: Make
   command: make install
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/arc-theme"
   register: arc_theme_make
+  when: arc_theme_git.changed
 
 - name: Set GTK Icons to Ultra-Flat
   command: "gsettings set org.gnome.desktop.interface icon-theme Ultra-Flat"
