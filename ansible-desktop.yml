@@ -136,6 +136,7 @@
     # - { role: desktop-preferences }
     # - { role: albert, become: true }
     # - { role: altyo, become: true }
+    # - { role: arc-theme, become: true }
     # - { role: atom, become: true }
     # - { role: chromium, become: true }
     # - { role: claws-mail, become: true }

@@ -1,0 +1,58 @@
+---
+
+- name: Configure the Ultra flat icons APT repositories
+  apt_repository: repo="ppa:noobslab/icons" state=present
+
+- name: Install Ultra flat icons
+  apt: pkg=ultra-flat-icons state=latest
+  register: ultra_flat_icons
+
+- name: Install autoconf and automake
+  apt: pkg={{ item }} state=latest cache_valid_time={{ aptcachetime }}
+  with_items:
+    - autoconf
+    - automake
+
+- name: Install Arc-Theme
+  git: repo=https://github.com/horst3180/arc-theme dest="{{ ansible_env.HOME }}/.cache/arc-theme" update=yes accept_hostkey=yes
+  register: arc_theme_git
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Configure
+  command: ./autogen.sh --prefix=/usr --disable-transparency --disable-cinnamon --disable-gnome-shell --disable-xfce-notify --disable-xfwm --with-gnome=3.18
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/arc-theme"
+  register: arc_theme_configure
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Make
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/arc-theme"
+  register: arc_theme_make
+
+- name: Set GTK Icons to Ultra-Flat
+  command: "gsettings set org.gnome.desktop.interface icon-theme Ultra-Flat"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: ultra_flat_icons.changed
+
+- name: Set GTK Theme to Arc-Darker
+  command: "gsettings set org.gnome.desktop.interface gtk-theme Arc-Darker"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: arc_theme_git.changed
+
+- name: Set Windows Manager Theme to Arc-Darker
+  command: "gsettings set org.gnome.desktop.wm.preferences theme Arc-Darker"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: arc_theme_git.changed
+
+- name: Smaller icons size
+  command: "gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ icon-size 24"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: arc_theme_git.changed
