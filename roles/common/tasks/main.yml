@@ -53,6 +53,7 @@
     - tar
     - tmux
     - trash-cli
+    - tig
     - unzip
     - vim
     - wget
