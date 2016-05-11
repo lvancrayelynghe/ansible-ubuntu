@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=HeidiSQL
+Comment=HeidiSQL on Ubuntu
+Exec=env WINEDEBUG=-all WINEPREFIX=/home/{{ ansible_env.USER }}/.wine wine heidisql.exe
+Icon=/home/{{ ansible_env.USER }}/.local/share/icons/hicolor/48x48/apps/9103_heidisql.0.png
+Path=/home/{{ ansible_env.USER }}/.wine/drive_c/Program Files/HeidiSQL
+Terminal=false
+Type=Application
+Categories=Wine;
+StartupNotify=true
+StartupWMClass=heidisql.exe

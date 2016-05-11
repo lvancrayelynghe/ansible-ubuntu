@@ -6,6 +6,11 @@
 - name: Install Wine
   apt: pkg=wine state=latest
 
+- name: Create HeidiSQL desktop file
+  template:
+    src: "heidisql.desktop"
+    dest: "/home/{{ ansible_env.USER }}/.local/share/applications/heidisql.desktop"
+
 - name: HeidiSQL installation instructions
   debug:
     msg: "*** To install HeidiSQL, see http://askubuntu.com/a/459075 ***"
