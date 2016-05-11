@@ -5,3 +5,6 @@
 
 - name: Install SmartGit
   apt: pkg=smartgit state=latest
+
+- name: Create SmartGit desktop file
+  copy: src="smartgit.desktop" dest="{{ ansible_env.HOME }}/.local/share/applications/smartgit.desktop" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"

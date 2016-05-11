@@ -156,6 +156,7 @@
     # - { role: remmina, become: true }
     # - { role: shutter, become: true }
     # - { role: skype, become: true }
+    # - { role: smartgit, become: true }
     # - { role: sublime3, become: true }
     # - { role: teamviewer, become: true }
     # - { role: thunderbird, become: true }
