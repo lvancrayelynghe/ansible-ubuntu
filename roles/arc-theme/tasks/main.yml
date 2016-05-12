@@ -1,4 +1,6 @@
 ---
+# See https://github.com/horst3180/arc-theme
+# Clean theme with sudo rm -rf /usr/share/themes/{Arc,Arc-Darker,Arc-Dark}
 
 - name: Configure the Ultra flat icons APT repositories
   apt_repository: repo="ppa:noobslab/icons" state=present
