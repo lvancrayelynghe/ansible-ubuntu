@@ -24,6 +24,7 @@
       start: false
       service_enabled: no
     chromium:
+      set_default: true
       policy: false
       extensions: false
     elasticsearch:

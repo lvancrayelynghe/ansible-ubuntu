@@ -7,6 +7,10 @@
     update_cache: yes
     cache_valid_time: "{{ aptcachetime }}"
 
+- name: Set Chromium as default browser
+  command: update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/chromium-browser 250
+  when: chromium.set_default == true
+
 # See https://www.chromium.org/administrators/policy-list-3
 - name: Create Chromium policies directory for all users
   file:
