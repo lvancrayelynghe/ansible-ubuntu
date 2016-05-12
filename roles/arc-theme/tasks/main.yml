@@ -14,6 +14,8 @@
   with_items:
     - autoconf
     - automake
+    - gtk2-engines-murrine
+    - gnome-themes-standard
 
 - name: Install Arc-Theme
   git: repo=https://github.com/horst3180/arc-theme dest="{{ ansible_env.HOME }}/.cache/arc-theme" update=yes accept_hostkey=yes
