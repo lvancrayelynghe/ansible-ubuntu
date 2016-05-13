@@ -86,6 +86,11 @@
       service_enabled: no
     ruby:
       version: "2.2"
+    ssh:
+      start: true
+      service_enabled: true
+      password_auth: false
+      root_login: false
     virtualbox:
       version: "5.0"
     vagrant:
@@ -130,7 +135,7 @@
     # - { role: python, become: true }
     # - { role: redis, become: true }
     # - { role: ruby, become: true }
-    # - { role: ssh-hardening, become: true }
+    # - { role: ssh, become: true }
     # Desktop roles
     # - { role: desktop, become: true }
     # - { role: desktop-autostart, become: true }

@@ -1,5 +1,7 @@
 ---
 
 ssh:
+  start: true
+  service_enabled: true
   password_auth: false
   root_login: false
