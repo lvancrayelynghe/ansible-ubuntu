@@ -150,3 +150,7 @@
     - gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ new-profile 'disabled'
     - gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ save-contents 'disabled'
     - gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ toggle-menubar 'disabled'
+
+- name: Update Terminal desktop file to run maximized
+  replace: dest=/usr/share/applications/gnome-terminal.desktop regexp='^Exec=(.+)$' replace='Exec=gnome-terminal --window --maximize'
+  become: true
