@@ -1,0 +1,29 @@
+---
+
+- name: Check MailHog version
+  command: "mailhog --version"
+  register: mailhog_version
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Cleanup MailHog existing installation
+  file: path="/usr/local/bin/mailhog" state=absent
+  when: mailhog_version | failed
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Download MailHog
+  get_url: url="{{ mailhog.url }}" dest=/usr/local/bin/mailhog force=no
+  when: mailhog_version | failed
+
+- name: Make MailHog executable
+  file: path=/usr/local/bin/mailhog mode=0755
+  when: mailhog_version | failed
+
+- name: Copy MailHog init script
+  template: src=systemd/mailhog dest=/etc/systemd/system/mailhog.service owner=root group=root mode=0644
+
+- name: "Ensure MailHog is {{ mailhog.start | ternary('started','stopped') }}"
+  service: name=mailhog state={{ mailhog.start | ternary('restarted','stopped') }} enabled={{ mailhog.service_enabled }}

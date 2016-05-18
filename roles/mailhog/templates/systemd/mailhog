@@ -1,0 +1,12 @@
+[Unit]
+Description=MailHog
+Documentation=https://github.com/mailhog/MailHog/
+
+[Service]
+# Ubuntu/Debian convention:
+EnvironmentFile=-/etc/default/mailcatcher
+Type=simple
+ExecStart=/usr/local/bin/mailhog -api-bind-addr {{ mailhog.http_bind_address }} -ui-bind-addr {{ mailhog.http_bind_address }} -smtp-bind-addr {{ mailhog.smtp_bind_address }}
+
+[Install]
+WantedBy=multi-user.target

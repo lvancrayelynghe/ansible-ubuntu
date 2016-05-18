@@ -1,0 +1,8 @@
+---
+
+mailhog:
+  start: false
+  service_enabled: no
+  url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
+  http_bind_address: 0.0.0.0:8025
+  smtp_bind_address: 0.0.0.0:1025
