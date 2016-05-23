@@ -84,6 +84,7 @@
       robo: true
       phpmd: true
       phpunit: true
+      codeception: true
       cssprites: true
     remarkable:
       version: "1.62"

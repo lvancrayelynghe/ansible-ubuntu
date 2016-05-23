@@ -7,4 +7,5 @@ php_phar_tools:
   robo: true
   phpmd: true
   phpunit: true
+  codeception: true
   cssprites: true

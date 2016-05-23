@@ -24,6 +24,10 @@
   get_url: url="https://phar.phpunit.de/phpunit.phar" dest=/usr/local/bin/phpunit force=no mode=0755
   when: php_phar_tools.phpunit
 
+- name: Installing CodeCeption globally
+  get_url: url="http://codeception.com/codecept.phar" dest=/usr/local/bin/codecept force=no mode=0755
+  when: php_phar_tools.codeception
+
 - name: Installing CSSPrites globally
   get_url: url="http://benoth.github.io/phar/cssprites/cssprites.phar" dest=/usr/local/bin/cssprites force=no mode=0755
   when: php_phar_tools.cssprites
