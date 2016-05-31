@@ -24,6 +24,7 @@
     - curl
     - diffutils
     - dos2unix
+    - fdupes
     - ftp-ssl
     - gawk
     - gcc
