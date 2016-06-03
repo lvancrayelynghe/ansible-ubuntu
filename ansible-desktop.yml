@@ -148,6 +148,7 @@
     # - { role: desktop, become: true }
     # - { role: desktop-autostart, become: true }
     # - { role: desktop-preferences }
+    # - { role: adapta-theme, become: true }
     # - { role: albert, become: true }
     # - { role: altyo, become: true }
     # - { role: arc-theme, become: true }
