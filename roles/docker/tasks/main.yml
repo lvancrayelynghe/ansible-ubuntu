@@ -9,5 +9,11 @@
 - name: Install
   apt: pkg=docker-engine state=latest update_cache=yes
 
+- name: Create Docker group
+  group: name=docker state=present
+
+- name: Add current user to Docker group
+  user: name="{{ ansible_env.USER }}" groups=docker append=yes
+
 - name: "Ensure Docker is {{ docker.start | ternary('started','stopped') }}"
   service: name=docker state={{ docker.start | ternary('restarted','stopped') }} enabled={{ docker.service_enabled }}
