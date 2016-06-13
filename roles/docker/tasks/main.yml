@@ -1,0 +1,13 @@
+---
+
+- name: Installing apt-key
+  apt_key: id="F76221572C52609D" url=https://apt.dockerproject.org/gpg state=present
+
+- name: Add deb repository
+  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main' state=present
+
+- name: Install
+  apt: pkg=docker-engine state=latest update_cache=yes
+
+- name: "Ensure Docker is {{ docker.start | ternary('started','stopped') }}"
+  service: name=docker state={{ docker.start | ternary('restarted','stopped') }} enabled={{ docker.service_enabled }}

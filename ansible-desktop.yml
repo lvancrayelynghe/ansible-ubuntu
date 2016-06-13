@@ -27,6 +27,9 @@
       set_default: true
       policy: false
       extensions: false
+    docker:
+      start: false
+      service_enabled: no
     elasticsearch:
       start: false
       service_enabled: no
@@ -128,6 +131,7 @@
     # - { role: beanstalkd, become: true }
     # - { role: blackfire, become: true }
     # - { role: composer, become: true }
+    # - { role: docker, become: true }
     # - { role: elasticsearch, become: true }
     # - { role: exim, become: true }
     # - { role: fail2ban, become: true }
