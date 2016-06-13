@@ -1,0 +1,37 @@
+---
+
+- name: Check sift version
+  command: "sift --version"
+  register: sift_version
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Cleanup sift existing installation
+  file: path="/usr/local/bin/sift" state=absent
+  when: sift_version | failed
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Download sift archive
+  get_url: url="{{ sift.url }}" dest=/tmp/download-sift.tar.gz force=no
+  when: sift_version | failed
+
+- name: Extract sift archive
+  unarchive: src=/tmp/download-sift.tar.gz dest=/tmp creates="/tmp/{{ sift.dir }}"
+  when: sift_version | failed
+
+- name: Install sift
+  command: mv /tmp/{{ sift.dir }}/sift /usr/local/bin/sift creates="/usr/local/bin/sift" removes="/tmp/{{ sift.dir }}/sift"
+  when: sift_version | failed
+
+- name: Make sift executable
+  file: path=/usr/local/bin/sift mode=0755
+  when: sift_version | failed
+
+- name: Cleanup sift installer
+  file: path=/tmp/download-sift.tar.gz state=absent
+
+- name: Cleanup sift installer
+  file: path="/tmp/{{ sift.dir }}" state=absent

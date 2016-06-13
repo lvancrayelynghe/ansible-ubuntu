@@ -1,0 +1,5 @@
+---
+
+sift:
+  url: https://sift-tool.org/downloads/sift/sift_0.8.0_linux_amd64.tar.gz
+  dir: sift_0.8.0_linux_amd64
