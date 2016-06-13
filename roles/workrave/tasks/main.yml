@@ -1,0 +1,4 @@
+---
+
+- name: Install Workrave
+  apt: pkg=workrave state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
