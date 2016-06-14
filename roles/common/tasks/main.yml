@@ -37,6 +37,7 @@
     - imagemagick
     - iotop
     - less
+    - lftp
     - make
     - nano
     - nfs-common
