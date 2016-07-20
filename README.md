@@ -1,5 +1,5 @@
 # Ansible-ubuntu
-Ansible scripts to setup Ubuntu desktop/server
+Ansible roles to setup Ubuntu desktop and Ubuntu server (14.04 and 16.04)
 
 
 ## Requirements
