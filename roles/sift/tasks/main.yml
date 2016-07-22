@@ -18,6 +18,7 @@
   get_url: url="{{ sift.url }}" dest=/tmp/download-sift.tar.gz force=no
   when: sift_version | failed
 
+# Waiting for a fix https://github.com/ansible/ansible/issues/11348
 - name: Extract sift archive
   unarchive: src=/tmp/download-sift.tar.gz dest=/tmp creates="/tmp/{{ sift.dir }}"
   when: sift_version | failed
