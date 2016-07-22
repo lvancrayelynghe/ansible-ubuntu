@@ -155,6 +155,7 @@
     # - { role: ssh, become: true }
     # Desktop roles
     # - { role: desktop, become: true }
+    # - { role: desktop-unity, become: true }
     # - { role: desktop-autostart, become: true }
     # - { role: desktop-preferences }
     # - { role: adapta-theme, become: true }

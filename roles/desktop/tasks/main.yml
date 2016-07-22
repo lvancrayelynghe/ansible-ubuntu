@@ -1,11 +1,5 @@
 ---
 
-- name: Ensure Unity MediaScanner is removed (useless + cause high CPU peaks)
-  apt: pkg={{ item }} purge=yes state=absent
-  with_items:
-    - mediascanner2.0
-    - libmediascanner-2.0-0
-
 - name: Install common desktop packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
@@ -13,10 +7,6 @@
     - geany
     - libnotify-bin
     - meld # Diff / merge tool
-    - nautilus-compare
-    - nautilus-image-converter
-    - nautilus-image-manipulator
-    - nautilus-wipe
     - mpv
     - rhythmbox
     - tilda # lighter than guake
@@ -31,47 +21,11 @@
     - xdotool # to control windows
     - sox
 
-- name: Install common desktop packages if Ubuntu 14.04
-  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
-  with_items:
-    - nautilus-open-terminal
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
-
 - name: Install common desktop packages if Ubuntu 16.04
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
     - fonts-hack-ttf
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
-
-- name: Remove Amazon and others Unity shits
-  apt: pkg={{ item }} purge=yes state=absent
-  with_items:
-    - unity-lens-shopping
-    - unity-scope-video-remote
-    - unity-scope-musicstores
-    - unity-scope-gdrive
-    - unity-scope-gmusicbrowser
-    - unity-scope-gourmet
-    - unity-scope-guayadeque
-    - unity-scope-musicstores
-    - unity-scope-musique
-    - unity-scope-googlenews
-    - unity-scope-launchpad
-    - unity-scope-onlinemusic
-    - unity-scope-yahoostock
-
-- name: Remove shitty Amazon shortcut
-  file: path=/usr/share/applications/ubuntu-amazon-default.desktop force=yes state=absent
-
-- name: Disable WebApps and other shitty integrations
-  command: "{{ item }}"
-  become: true
-  become_user: "{{ ansible_env.USER }}"
-  with_items:
-    - gsettings set com.canonical.unity.webapps integration-allowed false
-    - gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
-    - gsettings set com.canonical.unity.webapps preauthorized-domains "[]"
-    - gsettings set com.canonical.Unity.ApplicationsLens display-available-apps false
 
 - name: Block Ubuntu product search in system host file
   lineinfile: dest=/etc/hosts regexp="^127\.0\.0\.1   productsearch.ubuntu.com$" line="127.0.0.1   productsearch.ubuntu.com" state=present
