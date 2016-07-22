@@ -30,6 +30,8 @@
     docker:
       start: false
       service_enabled: no
+    dotfiles:
+      path: .dotfiles
     elasticsearch:
       start: false
       service_enabled: no
