@@ -157,7 +157,7 @@
     # - { role: desktop, become: true }
     # - { role: desktop-unity, become: true }
     # - { role: desktop-autostart, become: true }
-    # - { role: desktop-preferences }
+    # - { role: desktop-preferences-unity }
     # - { role: adapta-theme, become: true }
     # - { role: albert, become: true }
     # - { role: altyo, become: true }
