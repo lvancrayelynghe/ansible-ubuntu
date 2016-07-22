@@ -20,7 +20,7 @@
   register: public_dotfiles_create
 
 - name: Clone public dotfiles repository
-  git: repo=https://github.com/Benoth/{{ dotfiles.path }}.git dest="{{ ansible_env.HOME }}/{{ dotfiles.path }}/public" update=yes accept_hostkey=yes
+  git: repo=https://github.com/Benoth/dotfiles.git dest="{{ ansible_env.HOME }}/{{ dotfiles.path }}/public" update=yes accept_hostkey=yes
   # failed_when: false
 
 - name: Configure repository
