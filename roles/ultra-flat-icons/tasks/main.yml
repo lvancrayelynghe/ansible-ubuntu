@@ -1,0 +1,14 @@
+---
+
+- name: Configure the Ultra flat icons APT repositories
+  apt_repository: repo="ppa:noobslab/icons" state=present
+
+- name: Install Ultra flat icons
+  apt: pkg=ultra-flat-icons state=latest
+  register: ultra_flat_icons
+
+- name: Set GTK Icons to Ultra-Flat
+  command: "gsettings set org.gnome.desktop.interface icon-theme Ultra-Flat"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  changed_when: ultra_flat_icons.changed

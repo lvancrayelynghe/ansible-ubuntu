@@ -1,21 +1,8 @@
 ---
 
-- name: Configure the Ultra flat icons APT repositories
-  apt_repository: repo="ppa:noobslab/icons" state=present
-
-- name: Install Ultra flat icons
-  apt: pkg=ultra-flat-icons state=latest
-  register: ultra_flat_icons
-
 - name: Install Flatabulous
   git: repo=https://github.com/anmoljagetia/Flatabulous dest=/usr/share/themes/Flatabulous update=yes accept_hostkey=yes
   register: flatabulous_git
-
-- name: Set GTK Icons to Ultra-Flat
-  command: "gsettings set org.gnome.desktop.interface icon-theme Ultra-Flat"
-  become: true
-  become_user: "{{ ansible_env.USER }}"
-  changed_when: ultra_flat_icons.changed
 
 - name: Set GTK Theme to Flatabulous
   command: "gsettings set org.gnome.desktop.interface gtk-theme Flatabulous"
@@ -25,12 +12,6 @@
 
 - name: Set Windows Manager Theme to Flatabulous
   command: "gsettings set org.gnome.desktop.wm.preferences theme Flatabulous"
-  become: true
-  become_user: "{{ ansible_env.USER }}"
-  changed_when: flatabulous_git.changed
-
-- name: Smaller icons size
-  command: "gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ icon-size 24"
   become: true
   become_user: "{{ ansible_env.USER }}"
   changed_when: flatabulous_git.changed

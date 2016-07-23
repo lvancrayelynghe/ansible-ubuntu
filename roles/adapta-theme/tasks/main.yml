@@ -2,13 +2,6 @@
 # See https://github.com/tista500/Adapta/
 # Clean theme with sudo rm -rf /usr/share/themes/{Adapta,Adapta-Nokto}
 
-- name: Configure the Ultra flat icons APT repositories
-  apt_repository: repo="ppa:noobslab/icons" state=present
-
-- name: Install Ultra flat icons
-  apt: pkg=ultra-flat-icons state=latest
-  register: ultra_flat_icons
-
 - name: Install autoconf and automake
   apt: pkg={{ item }} state=latest cache_valid_time={{ aptcachetime }}
   with_items:
@@ -39,12 +32,6 @@
   register: adapta_theme_make
   when: adapta_theme_git.changed
 
-- name: Set GTK Icons to Ultra-Flat
-  command: "gsettings set org.gnome.desktop.interface icon-theme Ultra-Flat"
-  become: true
-  become_user: "{{ ansible_env.USER }}"
-  changed_when: ultra_flat_icons.changed
-
 - name: Set GTK Theme to Adapta-Nokto
   command: "gsettings set org.gnome.desktop.interface gtk-theme Adapta-Nokto"
   become: true
@@ -53,12 +40,6 @@
 
 - name: Set Windows Manager Theme to Adapta-Nokto
   command: "gsettings set org.gnome.desktop.wm.preferences theme Adapta-Nokto"
-  become: true
-  become_user: "{{ ansible_env.USER }}"
-  changed_when: adapta_theme_git.changed
-
-- name: Smaller icons size
-  command: "gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ icon-size 24"
   become: true
   become_user: "{{ ansible_env.USER }}"
   changed_when: adapta_theme_git.changed

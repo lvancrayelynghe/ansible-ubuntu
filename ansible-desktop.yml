@@ -187,6 +187,7 @@
     # - { role: sublime3, become: true }
     # - { role: teamviewer, become: true }
     # - { role: thunderbird, become: true }
+    # - { role: ultra-flat-icons, become: true }
     # - { role: vagrant, become: true }
     # - { role: virtualbox, become: true }
     # - { role: vokoscreen, become: true }
