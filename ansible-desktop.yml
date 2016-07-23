@@ -155,7 +155,7 @@
     # - { role: ssh, become: true }
     # Desktop roles
     # - { role: desktop, become: true }
-    # - { role: desktop-unity, become: true }
+    # - { role: desktop-cleanup, become: true }
     # - { role: desktop-autostart, become: true }
     # - { role: desktop-preferences-unity }
     # - { role: adapta-theme, become: true }
@@ -175,6 +175,7 @@
     # - { role: indicator-sysmonitor, become: true }
     # - { role: libreoffice, become: true }
     # - { role: mysql-workbench, become: true }
+    # - { role: nautilus-plugins, become: true }
     # - { role: nemo, become: true }
     # - { role: notepadqq, become: true }
     # - { role: notify-osd, become: true }
