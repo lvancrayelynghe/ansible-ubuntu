@@ -193,6 +193,7 @@
     # - { role: vokoscreen, become: true }
     # - { role: wine, become: true }
     # - { role: workrave, become: true }
+    # - { role: xfce-dockbarx, become: true }
     # - { role: xmind, become: true }
     # User roles
     # - { role: gulp}

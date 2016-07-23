@@ -1,0 +1,12 @@
+---
+
+- name: Configure the Dockbar PPA
+  apt_repository: repo="ppa:dockbar-main/ppa" state=present
+
+# xfce4-panel --quit ; pkill xfconfd ; xfce4-panel &
+# xfce4-panel --restart
+- name: Install DockbarX XFCE plugin
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - xfce4-dockbarx-plugin
+    - dockbarx-themes-extra
