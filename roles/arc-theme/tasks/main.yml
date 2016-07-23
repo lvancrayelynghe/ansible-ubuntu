@@ -2,13 +2,14 @@
 # See https://github.com/horst3180/arc-theme
 # Clean theme with sudo rm -rf /usr/share/themes/{Arc,Arc-Darker,Arc-Dark}
 
-- name: Install autoconf and automake
+- name: Install Arc-Theme dependencies
   apt: pkg={{ item }} state=latest cache_valid_time={{ aptcachetime }}
   with_items:
     - autoconf
     - automake
     - gtk2-engines-murrine
     - gnome-themes-standard
+    - libgtk-3-dev
 
 - name: Install Arc-Theme
   git: repo=https://github.com/horst3180/arc-theme dest="{{ ansible_env.HOME }}/.cache/arc-theme" update=yes accept_hostkey=yes
@@ -17,7 +18,7 @@
   become_user: "{{ ansible_env.USER }}"
 
 - name: Configure
-  command: ./autogen.sh --prefix=/usr --disable-transparency --disable-cinnamon --disable-gnome-shell --disable-xfwm --with-gnome=3.18
+  command: ./autogen.sh --prefix=/usr --disable-transparency --disable-cinnamon --disable-gnome-shell --with-gnome=3.18
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/arc-theme"
   register: arc_theme_configure
