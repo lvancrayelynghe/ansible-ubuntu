@@ -61,3 +61,8 @@
     - Musique
     - Public
     - Téléchargements
+
+- name : Run xdg-user-dirs-update
+  shell: xdg-user-dirs-update
+  become: true
+  become_user: "{{ ansible_env.USER }}"
