@@ -35,3 +35,29 @@
     - gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
     - gsettings set com.canonical.unity.webapps preauthorized-domains "[]"
     - gsettings set com.canonical.Unity.ApplicationsLens display-available-apps false
+
+- name: Remove exemples shortcut
+  file: path="{{ ansible_env.HOME }}/examples.desktop" force=yes state=absent
+
+# Reassign path :
+# xdg-user-dirs-update --set NAME ABSOLUTE_PATH
+#
+# Available values for NAME
+#   DESKTOP
+#   DOWNLOAD
+#   TEMPLATES
+#   PUBLICSHARE
+#   DOCUMENTS
+#   MUSIC
+#   PICTURES
+#   VIDEOS
+- name: Remove XDG directories
+  file: path="{{ ansible_env.HOME }}/{{ item }}" force=yes state=absent
+  with_items:
+    - Documents
+    - Modèles
+    - Images
+    - Vidéos
+    - Musique
+    - Public
+    - Téléchargements
