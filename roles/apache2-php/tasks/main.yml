@@ -8,7 +8,7 @@
 
 - name: Add Apache 2 vhosts
   template: src={{ item.template }}.j2 dest="/etc/apache2/sites-available/vhost-{{ item.vhost }}.conf"
-  with_items: vhosts
+  with_items: "{{ vhosts }}"
   register: apache2_php_confs
 
 - name: Clean Apache 2 vhosts
@@ -18,7 +18,7 @@
 
 - name: Enable Apache 2 vhosts
   shell: "a2ensite vhost-{{ item.vhost }}.conf"
-  with_items: vhosts
+  with_items: "{{ vhosts }}"
   notify: Restart apache2
 
 - name: Clean /etc/hosts file
@@ -26,7 +26,7 @@
 
 - name: Build /etc/hosts file
   lineinfile: dest=/etc/hosts regexp=".*{{ item.vhost }} \# apache2 vhost$" line="127.0.0.1   {{ item.vhost }} {{ '#' }} apache2 vhost" state=present
-  with_items: vhosts
+  with_items: "{{ vhosts }}"
 
 - name: List Apache 2 vhosts
   set_fact:

@@ -2,7 +2,7 @@
 
 - name: Add nginx vhosts
   template: src={{ item.template }}.j2 dest="/etc/nginx/conf.d/vhost-{{ item.vhost }}.conf"
-  with_items: vhosts
+  with_items: "{{ vhosts }}"
   register: nginx_phpfpm_confs
   notify: Restart nginx
 
@@ -11,7 +11,7 @@
 
 - name: Build /etc/hosts file
   lineinfile: dest=/etc/hosts regexp=".*{{ item.vhost }} \# nginx vhost$" line="127.0.0.1   {{ item.vhost }} {{ '#' }} nginx vhost" state=present
-  with_items: vhosts
+  with_items: "{{ vhosts }}"
 
 - name: List nginx vhosts
   set_fact:
