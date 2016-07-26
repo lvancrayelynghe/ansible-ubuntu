@@ -27,6 +27,14 @@
       set_default: true
       policy: false
       extensions: false
+    desktop_autostart:
+      add:
+        - { name: Tilda , exec: /usr/bin/tilda }
+      remove:
+        - deja-dup-monitor.desktop
+        - onboard-autostart.desktop
+        - orca-autostart.desktop
+        - vino-server.desktop
     docker:
       start: false
       service_enabled: no

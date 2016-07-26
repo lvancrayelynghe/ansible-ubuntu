@@ -1,11 +1,11 @@
 ---
 
 php_phar_tools:
-  php_cs_fixer: true
-  phpcpd: true
-  sami: true
-  robo: true
-  phpmd: true
-  phpunit: true
-  codeception: true
-  cssprites: true
+  php_cs_fixer: false
+  phpcpd: false
+  sami: false
+  robo: false
+  phpmd: false
+  phpunit: false
+  codeception: false
+  cssprites: false
