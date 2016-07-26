@@ -1,5 +1,6 @@
 ---
 
 chromium:
+  set_default: false
   policy: false
   extensions: false

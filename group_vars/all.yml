@@ -1,4 +1,40 @@
 ---
 
+# http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
 aptcachetime: 3600
-vhosts: []
+locale: "fr_FR.UTF-8"
+timezone: "Europe/Paris"
+chromium:
+  set_default: true
+  policy: false
+  extensions: false
+desktop_autostart:
+  add:
+    - { name: Tilda , exec: /usr/bin/tilda }
+  remove:
+    - deja-dup-monitor.desktop
+    - onboard-autostart.desktop
+    - orca-autostart.desktop
+    - vino-server.desktop
+php_phar_tools:
+  php_cs_fixer: true
+  phpcpd: true
+  sami: true
+  robo: true
+  phpmd: true
+  phpunit: true
+  codeception: true
+  cssprites: true
+ssh:
+  start: true
+  service_enabled: true
+  password_auth: false
+  root_login: false
+vhosts:
+  - template: standard
+    vhost: "default70.dev"
+    path: "{{ ansible_env.HOME }}/projects/default-7.0"
+  - template: standard
+    vhost: "default56.dev"
+    path: "{{ ansible_env.HOME }}/projects/default-5.6"
+    php: "5.6"
