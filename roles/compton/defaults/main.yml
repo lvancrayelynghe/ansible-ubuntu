@@ -1,0 +1,5 @@
+---
+
+compton:
+  autostart: false
+  xfconf: false

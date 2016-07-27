@@ -1,0 +1,37 @@
+---
+
+- name: Add repository
+  apt_repository: repo="ppa:richardgv/compton" state=present
+  when: ansible_distribution == 'Ubuntu' and (ansible_distribution_version == '14.04' or ansible_distribution_version == '14.10')
+
+- name: Install
+  apt: name=compton state=latest update_cache=yes
+
+- name: Create config file
+  copy:
+    src: compton.conf
+    dest: "{{ ansible_env.HOME }}/.config/compton.conf"
+    force: no
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+
+- name: Create startup application directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/autostart"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+
+- name: Add new startup entry
+  copy:
+    src: compton.desktop
+    dest: "{{ ansible_env.HOME }}/.config/autostart/compton.desktop"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+  when: compton.autostart == true
+
+- name: Disable XFCE compositing
+  shell: xfconf-query -c xfwm4 -p "/general/use_compositing" -s false
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+  when: compton.xfconf == true

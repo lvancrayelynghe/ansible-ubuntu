@@ -49,6 +49,7 @@
     # - { role: atom, become: true }
     # - { role: chromium, become: true }
     # - { role: claws-mail, become: true }
+    # - { role: compton, become: true }
     # - { role: dbeaver, become: true }
     # - { role: filezilla, become: true }
     # - { role: firefox, become: true }

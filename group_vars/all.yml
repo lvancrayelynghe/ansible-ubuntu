@@ -8,6 +8,9 @@ chromium:
   set_default: true
   policy: false
   extensions: false
+compton:
+  autostart: true
+  xfconf: true
 desktop_autostart:
   add:
     - { name: Tilda , exec: /usr/bin/tilda }
