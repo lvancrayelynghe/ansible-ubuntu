@@ -2,7 +2,7 @@
 Name=ksuperkey
 Comment=
 Type=Application
-Exec=ksuperkey -e 'Super_L=Control_L|Escape'
+Exec=ksuperkey -e 'Super_L=Super_L|Escape'
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
