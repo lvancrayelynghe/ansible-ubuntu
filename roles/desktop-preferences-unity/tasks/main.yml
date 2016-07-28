@@ -3,6 +3,9 @@
 #   gsettings list-recursively > original.txt
 #   diff <(cat original.txt) <(gsettings list-recursively)
 
+- name: Install Unity tweak tool
+  apt: pkg=unity-tweak-tool state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+
 - name: Set global keybindings
   command: "{{ item }}"
   with_items:
