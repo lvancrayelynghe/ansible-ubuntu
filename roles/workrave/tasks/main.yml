@@ -2,3 +2,17 @@
 
 - name: Install Workrave
   apt: pkg=workrave state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+
+- name: Create startup application directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/autostart"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+
+- name: Add new workrave startup entry
+  copy:
+    src: workrave.desktop
+    dest: "{{ ansible_env.HOME }}/.config/autostart/workrave.desktop"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"

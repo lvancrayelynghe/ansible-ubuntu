@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=workrave
+Comment=
+Type=Application
+Exec=workrave
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
