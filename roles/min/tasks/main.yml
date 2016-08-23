@@ -1,0 +1,18 @@
+---
+
+- name: Check if Min is installed
+  command: dpkg-query -W min
+  register: min_check_deb
+  failed_when: min_check_deb.rc > 1
+  changed_when: min_check_deb.rc == 1
+
+- name: Download Min
+  get_url: url="https://github.com/minbrowser/min/releases/download/v1.4.1/Min_1.4.1_amd64.deb" dest="/tmp/download-min-latest.deb"
+  when: min_check_deb.rc == 1
+
+- name: Install Min
+  apt: deb="/tmp/download-min-latest.deb"
+  when: min_check_deb.rc == 1
+
+- name: Clean Min deb file
+  file: path=/tmp/download-min-latest.deb state=absent

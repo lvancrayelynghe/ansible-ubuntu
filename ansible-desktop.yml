@@ -60,6 +60,7 @@
     # - { role: indicator-sysmonitor, become: true }
     # - { role: ksuperkey, become: true }
     # - { role: libreoffice, become: true }
+    # - { role: min, become: true }
     # - { role: mysql-workbench, become: true }
     # - { role: nautilus-plugins, become: true }
     # - { role: nemo, become: true }
