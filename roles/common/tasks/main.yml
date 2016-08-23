@@ -17,6 +17,7 @@
 - name: Install common packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
+    - afuse
     - aptitude
     - axel
     - build-essential
@@ -46,6 +47,7 @@
     - p7zip
     - pv
     - pwgen
+    - ranger
     - rar
     - rsync
     - smbclient
