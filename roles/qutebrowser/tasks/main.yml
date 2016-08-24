@@ -1,0 +1,47 @@
+---
+
+- name: Install dependencies
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - python3-lxml
+    - python-tox
+    - python3-pyqt5
+    - python3-pyqt5.qtwebkit
+    - python3-sip
+    - python3-jinja2
+    - python3-pygments
+    - python3-yaml
+
+- name: Check if PyPEG2 is installed
+  command: dpkg-query -W python3-pypeg2
+  register: python3_pypeg2_check_deb
+  failed_when: python3_pypeg2_check_deb.rc > 1
+  changed_when: python3_pypeg2_check_deb.rc == 1
+
+- name: Download PyPEG2
+  get_url: url="https://qutebrowser.org/python3-pypeg2_2.15.2-1_all.deb" dest="/tmp/download-python3-pypeg2-latest.deb"
+  when: python3_pypeg2_check_deb.rc == 1
+
+- name: Install PyPEG2
+  apt: deb="/tmp/download-python3-pypeg2-latest.deb"
+  when: python3_pypeg2_check_deb.rc == 1
+
+- name: Clean PyPEG2 deb file
+  file: path=/tmp/download-python3-pypeg2-latest.deb state=absent
+
+- name: Check if qutebrowser is installed
+  command: dpkg-query -W qutebrowser
+  register: qutebrowser_check_deb
+  failed_when: qutebrowser_check_deb.rc > 1
+  changed_when: qutebrowser_check_deb.rc == 1
+
+- name: Download qutebrowser
+  get_url: url="https://github.com/The-Compiler/qutebrowser/releases/download/v0.8.2/qutebrowser_0.8.2-1_all.deb" dest="/tmp/download-qutebrowser-latest.deb"
+  when: qutebrowser_check_deb.rc == 1
+
+- name: Install qutebrowser
+  apt: deb="/tmp/download-qutebrowser-latest.deb"
+  when: qutebrowser_check_deb.rc == 1
+
+- name: Clean qutebrowser deb file
+  file: path=/tmp/download-qutebrowser-latest.deb state=absent
