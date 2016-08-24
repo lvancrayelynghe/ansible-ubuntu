@@ -1,0 +1,18 @@
+---
+
+- name: Check if SunFlower is installed
+  command: dpkg-query -W sunflower
+  register: sunflower_check_deb
+  failed_when: sunflower_check_deb.rc > 1
+  changed_when: sunflower_check_deb.rc == 1
+
+- name: Download SunFlower
+  get_url: url="http://sunflower-fm.org/pub/sunflower-0.3.61-1.all.deb" dest="/tmp/download-sunflower-latest.deb"
+  when: sunflower_check_deb.rc == 1
+
+- name: Install SunFlower
+  apt: deb="/tmp/download-sunflower-latest.deb"
+  when: sunflower_check_deb.rc == 1
+
+- name: Clean SunFlower deb file
+  file: path=/tmp/download-sunflower-latest.deb state=absent
