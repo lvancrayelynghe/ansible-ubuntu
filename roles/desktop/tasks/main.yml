@@ -4,21 +4,23 @@
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
   with_items:
     - bleachbit
+    - easytag # audio files metadata management
     - geany
     - libnotify-bin
     - meld # Diff / merge tool
+    - cifs-utils
     - mpv
-    - rhythmbox
-    - tilda # lighter than guake
     - pinta # light paint.net equivalent
+    - rhythmbox
+    - rxvt-unicode-256color
+    - sox # to play sounds
+    - tilda # lighter than guake
     - ubuntu-restricted-extras # MP3, Microsoft fonts, Flash plugin, LAME and DVD playback
     - unetbootin # create bootable USB drives
-    - easytag # audio files metadata management
     - vlc
-    - xclip
     - wmctrl # to control windows
+    - xclip # to manipulate the clipboard
     - xdotool # to control windows
-    - sox
 
 - name: Install common desktop packages if Ubuntu 16.04
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}

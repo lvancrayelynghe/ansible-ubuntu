@@ -22,6 +22,7 @@
     - axel
     - build-essential
     - bzip2
+    - colortest
     - curl
     - diffutils
     - dos2unix
