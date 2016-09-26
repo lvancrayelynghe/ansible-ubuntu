@@ -1,0 +1,7 @@
+---
+
+- name: Add SlOp repository
+  apt_repository: repo="ppa:nilarimogard/webupd8" state=present
+
+- name: Install SlOp
+  apt: name=slop state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
