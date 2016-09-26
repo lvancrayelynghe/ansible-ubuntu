@@ -69,6 +69,7 @@
     # - { role: qutebrowser, become: true }
     # - { role: remarkable, become: true }
     # - { role: remmina, become: true }
+    # - { role: ripgrep, become: true }
     # - { role: shutter, become: true }
     # - { role: sift, become: true }
     # - { role: skype, become: true }

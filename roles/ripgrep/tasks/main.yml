@@ -1,0 +1,41 @@
+---
+
+- name: Check ripgrep version
+  command: "rg --version"
+  register: ripgrep_version
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Cleanup ripgrep existing installation
+  file: path="/usr/local/bin/ripgrep" state=absent
+  when: ripgrep_version | failed
+  ignore_errors: true
+  failed_when: false
+  changed_when: false
+
+- name: Download ripgrep archive
+  get_url: url="{{ ripgrep.url }}" dest=/tmp/download-ripgrep.tar.gz force=no
+  when: ripgrep_version | failed
+
+- name: Extract ripgrep archive
+  unarchive: src=/tmp/download-ripgrep.tar.gz dest=/tmp creates="/tmp/{{ ripgrep.dir }}"
+  when: ripgrep_version | failed
+
+- name: Install ripgrep
+  command: mv /tmp/{{ ripgrep.dir }}/rg /usr/local/bin/rg creates="/usr/local/bin/rg" removes="/tmp/{{ ripgrep.dir }}/rg"
+  when: ripgrep_version | failed
+
+- name: Install ripgrep manapage
+  command: mv /tmp/{{ ripgrep.dir }}/rg.1 /usr/share/man/man1/rg.1 creates="/usr/share/man/man1/rg.1" removes="/tmp/{{ ripgrep.dir }}/rg.1"
+  when: ripgrep_version | failed
+
+- name: Make ripgrep executable
+  file: path=/usr/local/bin/rg mode=0755
+  when: ripgrep_version | failed
+
+- name: Cleanup ripgrep installer
+  file: path=/tmp/download-ripgrep.tar.gz state=absent
+
+- name: Cleanup ripgrep installer
+  file: path="/tmp/{{ ripgrep.dir }}" state=absent

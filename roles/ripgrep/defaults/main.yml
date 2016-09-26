@@ -1,0 +1,5 @@
+---
+
+ripgrep:
+  url: https://github.com/BurntSushi/ripgrep/releases/download/0.2.0/ripgrep-0.2.0-x86_64-unknown-linux-musl.tar.gz
+  dir: ripgrep-0.2.0-x86_64-unknown-linux-musl
