@@ -1,0 +1,18 @@
+---
+
+- name: Check if CopyQ is installed
+  command: dpkg-query -W copyq
+  register: copyq_check_deb
+  failed_when: copyq_check_deb.rc > 1
+  changed_when: copyq_check_deb.rc == 1
+
+- name: Download CopyQ {{ copyq.version }}
+  get_url: url="https://github.com/hluk/CopyQ/releases/download/v{{ copyq.version }}/copyq_{{ copyq.version }}_Ubuntu_16.04_i386.deb" dest="/tmp/download-copyq-latest.deb"
+  when: copyq_check_deb.rc == 1
+
+- name: Install CopyQ {{ copyq.version }}
+  apt: deb="/tmp/download-copyq-latest.deb"
+  when: copyq_check_deb.rc == 1
+
+- name: Clean CopyQ deb file
+  file: path=/tmp/download-copyq-latest.deb state=absent
