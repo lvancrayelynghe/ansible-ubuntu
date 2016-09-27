@@ -1,0 +1,4 @@
+---
+
+- name: Install URxvt perl extensions
+  git: repo=https://github.com/muennich/urxvt-perls.git dest="{{ ansible_env.HOME }}/.urxvt/ext" update=yes accept_hostkey=yes
