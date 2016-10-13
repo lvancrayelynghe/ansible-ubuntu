@@ -103,14 +103,11 @@
     # - { role: webpack }
 
 
-    # @todo dependency sxhkd in bspwm
     # @todo default bspwm config in bspwm
     # @todo default sxhkd config in bspwm
     # @todo default panel config in bspwm
 
     # @todo env vars in bspwm-panel with bash
     # @todo default panel in bspwm-panel
-    # @todo dependency bspwm in bspwm-panel
 
-    # @todo dependency bspwm in bspwm-environment
     # @todo default xinit config in bspwm-environment
