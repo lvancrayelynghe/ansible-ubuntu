@@ -106,7 +106,4 @@
     # @todo default bspwm config in bspwm
     # @todo default sxhkd config in bspwm
     # @todo default panel config in bspwm
-
-    # @todo default panel in bspwm-panel
-
-    # @todo default xinit config in bspwm-environment
+    # @todo default xinit config in bspwm
