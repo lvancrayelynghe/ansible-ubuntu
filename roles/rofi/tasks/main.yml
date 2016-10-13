@@ -1,0 +1,73 @@
+---
+
+- name: Clone xcb-util-xrm repository
+  git: repo=https://github.com/Airblader/xcb-util-xrm.git dest="{{ ansible_env.HOME }}/.cache/install/xcb-util-xrm" update=yes accept_hostkey=yes
+
+- name: Clone rofi repository
+  git: repo=https://github.com/DaveDavenport/rofi.git dest="{{ ansible_env.HOME }}/.cache/install/rofi" update=yes accept_hostkey=yes
+
+- name: Install build dependencies
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - build-essential
+    - autoconf
+    - automake
+    - make
+    - libtool
+    - xutils-dev
+    - libpango1.0-dev
+    - libcairo2-dev
+    - libstartup-notification0-dev
+    - libxcb-icccm4-dev
+    - libxcb-util0-dev
+    - libxcb-xinerama0-dev
+    - libxcb-xkb-dev
+    - libxcb1-dev
+    - libxkbcommon-dev
+    - libxkbcommon-x11-dev
+    - libxcb-ewmh-dev
+
+- name: Autogen xcb-util-xrm
+  command: ./autogen.sh --prefix=/usr
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/xcb-util-xrm"
+
+- name: Make xcb-util-xrm
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/xcb-util-xrm"
+
+- name: Make install xcb-util-xrm
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/xcb-util-xrm"
+
+- name: Git submodule init
+  command: git submodule update --init
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/rofi"
+
+- name: Autoreconf rofi
+  command: autoreconf -i
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/rofi"
+
+- name: Create build directory
+  file:
+    path: "{{ ansible_env.HOME }}/.cache/install/rofi/build"
+    state: directory
+
+- name: Configure
+  command: ../configure --enable-drun
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/rofi/build"
+
+- name: Make rofi
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/rofi/build"
+
+- name: Make install rofi
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/rofi/build"
