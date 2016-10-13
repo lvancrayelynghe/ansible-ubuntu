@@ -1,0 +1,78 @@
+---
+
+- name: Clone xdo repository
+  git: repo=https://github.com/baskerville/xdo.git dest="{{ ansible_env.HOME }}/.cache/install/xdo" update=yes accept_hostkey=yes
+
+- name: Install build dependencies
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - libasound2-dev
+    - libxcb-xtest0-dev
+    - libxft-dev
+    - libx11-xcb-dev
+
+- name: Install dependencies
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - conky-cli
+    - fonts-font-awesome
+    - ttf-ubuntu-font-family
+
+- name: Make xdo
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/xdo"
+
+- name: Make install xdo
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/xdo"
+
+- name: Clone sutils repository
+  git: repo=https://github.com/baskerville/sutils.git dest="{{ ansible_env.HOME }}/.cache/install/sutils" update=yes accept_hostkey=yes
+
+- name: Make sutils
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/sutils"
+
+- name: Make install sutils
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/sutils"
+
+- name: Clone xtitle repository
+  git: repo=https://github.com/baskerville/xtitle.git dest="{{ ansible_env.HOME }}/.cache/install/xtitle" update=yes accept_hostkey=yes
+
+- name: Make xtitle
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/xtitle"
+
+- name: Make install xtitle
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/xtitle"
+
+- name: Clone lemonbar repository
+  git: repo=https://github.com/krypt-n/bar.git dest="{{ ansible_env.HOME }}/.cache/install/lemonbar" update=yes accept_hostkey=yes
+
+- name: Make lemonbar
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/lemonbar"
+
+- name: Make install lemonbar
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/lemonbar"
+
+- name: Configure ZSH environment
+  lineinfile: dest="{{ ansible_env.HOME }}/.zshenv" regexp="{{ item.regexp }}" line="export {{ item.line }}" state=present
+  with_items:
+    - { regexp: 'PATH',               line: 'PATH="$PATH:$HOME/.config/bspwm/panel"' }
+    - { regexp: 'PANEL_FIFO',         line: 'PANEL_FIFO="/tmp/bspwm-top-panel-fifo"' }
+    - { regexp: 'PANEL_WM_NAME',      line: 'PANEL_WM_NAME="bspwm-top-panel"' }
+    - { regexp: 'PANEL_FONT_TEXT',    line: 'PANEL_FONT_TEXT="Ubuntu:pixelsize=13"' }
+    - { regexp: 'PANEL_FONT_SYMBOLS', line: 'PANEL_FONT_SYMBOLS="FontAwesome:pixelsize=11"' }
+    - { regexp: 'PANEL_HEIGHT',       line: 'PANEL_HEIGHT="24"' }

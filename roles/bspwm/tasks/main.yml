@@ -1,0 +1,37 @@
+---
+
+- name: Clone bspwm repository
+  git: repo=https://github.com/baskerville/bspwm.git dest="{{ ansible_env.HOME }}/.cache/install/bspwm" update=yes accept_hostkey=yes
+
+
+- name: Install build dependencies
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - build-essential
+    - libxcb-xinerama0-dev
+    - libxcb-icccm4-dev
+    - libxcb-randr0-dev
+    - libxcb-ewmh-dev
+
+- name: Install dependencies
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - xinit
+    - x11-utils
+    - x11-xserver-utils
+    - xcb
+    - xautolock
+    - wmctrl
+    - jq
+    - bc
+
+- name: make
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/bspwm"
+
+- name: make install
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/bspwm"
+
