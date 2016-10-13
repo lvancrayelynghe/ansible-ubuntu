@@ -1,4 +1,4 @@
 ---
 
 nodejs:
-  repository: "https://deb.nodesource.com/node_5.x"
+  repository: "https://deb.nodesource.com/node_6.x"
