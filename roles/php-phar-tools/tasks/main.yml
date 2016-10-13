@@ -31,3 +31,7 @@
 - name: Installing CSSPrites globally
   get_url: url="https://github.com/Benoth/cssprites/releases/download/1.0.1/cssprites.phar" dest=/usr/local/bin/cssprites force=no mode=0755
   when: php_phar_tools.cssprites
+
+- name: Installing WP-CLI globally
+  get_url: url="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar" dest=/usr/local/bin/wp force=no mode=0755
+  when: php_phar_tools.wpcli

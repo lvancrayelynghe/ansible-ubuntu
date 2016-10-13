@@ -28,6 +28,7 @@ php_phar_tools:
   phpunit: true
   codeception: true
   cssprites: true
+  wpcli: true
 ssh:
   start: true
   service_enabled: true

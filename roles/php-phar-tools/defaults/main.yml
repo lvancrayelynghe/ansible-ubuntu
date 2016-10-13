@@ -9,3 +9,4 @@ php_phar_tools:
   phpunit: false
   codeception: false
   cssprites: false
+  wpcli: false
