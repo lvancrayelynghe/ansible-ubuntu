@@ -13,6 +13,10 @@
     - udiskie
     - udisks2
     - xcb
+    - gamin
+    - polkit-gnome
+    - gvfs
+    - pcmanfm
     # - network-manager
     # - network-manager-gnome
     # - gnome-keyring
