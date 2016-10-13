@@ -29,5 +29,5 @@
   when: php_phar_tools.codeception
 
 - name: Installing CSSPrites globally
-  get_url: url="http://benoth.github.io/phar/cssprites/cssprites.phar" dest=/usr/local/bin/cssprites force=no mode=0755
+  get_url: url="https://github.com/Benoth/cssprites/releases/download/1.0.1/cssprites.phar" dest=/usr/local/bin/cssprites force=no mode=0755
   when: php_phar_tools.cssprites
