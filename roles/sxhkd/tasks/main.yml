@@ -1,0 +1,21 @@
+---
+
+- name: Clone sxhkd repository
+  git: repo=https://github.com/baskerville/sxhkd.git dest="{{ ansible_env.HOME }}/.cache/install/sxhkd" update=yes accept_hostkey=yes
+
+- name: Install build dependencies
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - build-essential
+    - libxcb-util0-dev
+    - libxcb-keysyms1-dev
+
+- name: Make
+  command: make
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/sxhkd"
+
+- name: Make install
+  command: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.cache/install/sxhkd"
