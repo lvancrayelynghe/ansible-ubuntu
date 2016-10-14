@@ -3,20 +3,44 @@
 - name: Install standard desktop packages
   apt: pkg="{{ item }}" state=latest
   with_items:
+    # Audio
     - alsa-base
-    - dkms
-    - dmenu
-    - feh
-    - lxappearance
     - pulseaudio
+    # Terminal
     - rxvt-unicode-256color
+    # Image viewer et background manager
+    - feh
+    - gpicview
+    # Themes manager
+    - lxappearance
+    # File browser (+ autmount + network)
+    - pcmanfm
+    - ranger
     - udiskie
     - udisks2
-    - xcb
     - gamin
-    - polkit-gnome
+    - policykit-1-gnome
     - gvfs
-    - pcmanfm
-    # - network-manager
-    # - network-manager-gnome
-    # - gnome-keyring
+    # Music player
+    - cmus
+    # Videos player
+    - mpv
+    - vlc
+    # Network management
+    - network-manager
+    - network-manager-gnome
+    - gnome-keyring
+    # System tray
+    - trayer
+    # Launcher
+    - dmenu
+    # Gtk engine
+    - gtk2-engines-murrine
+    # Fonts management
+    - font-manager
+    # Screenlocker
+    - i3lock
+    # Others
+    - dkms
+    - xautolock
+    - xcb
