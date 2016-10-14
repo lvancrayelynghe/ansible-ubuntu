@@ -25,13 +25,36 @@
     - jq
     - bc
 
-- name: make
+- name: Make
   command: make
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/bspwm"
 
-- name: make install
+- name: Make install
   command: make install
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/bspwm"
 
+# - name: Create default bspwmrc config file
+#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/bspwmrc" dest="{{ ansible_env.HOME }}/.config/bspwm/bspwmrc"
+#   when: bspwm.install.bspwmrc
+
+# - name: Create default sxhkdrc config file
+#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/sxhkdrc" dest="{{ ansible_env.HOME }}/.config/sxhkd/sxhkdrc"
+#   when: bspwm.install.sxhkdrc
+
+# - name: Create default panel config file (1/3)
+#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel"
+#   when: bspwm.install.panel
+
+# - name: Create default panel config file (2/3)
+#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel_bar" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel_bar"
+#   when: bspwm.install.panel
+
+# - name: Create default panel config file (3/3)
+#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel_colors" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel_colors"
+#   when: bspwm.install.panel
+
+# - name: Create default xinitrc config file
+#   copy: src="xinitrc" dest="{{ ansible_env.HOME }}/.xinitrc"
+#   when: bspwm.install.xinitrc

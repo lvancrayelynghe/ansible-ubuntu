@@ -1,0 +1,36 @@
+# Prepare env
+sxhkd -m 1 &
+xsetroot -cursor_name left_ptr &
+
+# DPMS monitor setting (standby -> suspend -> off) (in seconds)
+xset dpms 300 600 900 &
+
+if [ -e ~/.Xresources ]; then
+    xrdb -merge ~/.Xresources &
+fi
+if [ -e ~/.wallpaper.jpg ] && hash feh > /dev/null 2>&1 ; then
+    feh --bg-fill ~/.wallpaper.jpg &
+elif [ -e ~/.wallpaper.png ] && hash feh > /dev/null 2>&1 ; then
+    feh --bg-fill ~/.wallpaper.png &
+fi
+if [ -e ~/bin/screenlock ] && hash xautolock > /dev/null 2>&1 ; then
+    xautolock -time 5 -locker 'screenlock' &
+fi
+if [ -f /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 ] ; then
+    /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+fi
+if hash pcmanfm > /dev/null 2>&1 ; then
+    dbus-launch pcmanfm -d &
+fi
+if hash udiskie > /dev/null 2>&1 ; then
+    udiskie &
+fi
+if hash tilda > /dev/null 2>&1 ; then
+    tilda &
+fi
+if hash compton > /dev/null 2>&1 ; then
+    compton &
+fi
+
+# Start wm
+exec bspwm

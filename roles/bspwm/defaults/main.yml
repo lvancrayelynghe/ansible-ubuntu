@@ -1,0 +1,8 @@
+---
+
+bspwm:
+  install:
+    bspwmrc: false
+    sxhkdrc: false
+    xinitrc: false
+    panel: false
