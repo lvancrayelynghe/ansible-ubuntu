@@ -38,6 +38,8 @@
     - gtk2-engines-murrine
     # Fonts management
     - font-manager
+    # Calc
+    - gnome-calculator
     # Screenlocker
     - i3lock
     # Others
