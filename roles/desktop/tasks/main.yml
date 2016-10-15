@@ -5,6 +5,7 @@
   with_items:
     - bleachbit
     - easytag # audio files metadata management
+    - byzanz # screen recording
     - geany
     - libnotify-bin
     - meld # Diff / merge tool
