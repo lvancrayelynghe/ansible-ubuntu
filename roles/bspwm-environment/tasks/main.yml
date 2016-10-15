@@ -13,6 +13,7 @@
     - gpicview
     # Themes manager
     - lxappearance
+    - human-theme
     # File browser (+ autmount + network)
     - pcmanfm
     - ranger
