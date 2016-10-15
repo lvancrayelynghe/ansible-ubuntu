@@ -6,6 +6,7 @@
     # Audio
     - alsa-base
     - pulseaudio
+    - pavucontrol
     # Terminal
     - rxvt-unicode-256color
     # Image viewer et background manager
