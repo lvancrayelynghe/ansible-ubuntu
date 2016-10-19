@@ -14,11 +14,13 @@
     - automake
     - make
     - libtool
+    - xcb
     - xutils-dev
     - libpango1.0-dev
     - libcairo2-dev
     - libstartup-notification0-dev
     - libxcb-icccm4-dev
+    - libxcb-randr0-dev
     - libxcb-util0-dev
     - libxcb-xinerama0-dev
     - libxcb-xkb-dev
