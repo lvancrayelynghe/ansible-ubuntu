@@ -44,7 +44,10 @@
     - gnome-calculator
     # Screenlocker
     - i3lock
+    # Notification daemon
+    - dunst
     # Others
     - dkms
+    - gnome-themes-standard
     - xautolock
     - xcb
