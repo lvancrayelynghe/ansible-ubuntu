@@ -2,7 +2,8 @@
 
 - name: Clone bspwm repository
   git: repo=https://github.com/baskerville/bspwm.git dest="{{ ansible_env.HOME }}/.cache/install/bspwm" update=yes accept_hostkey=yes
-
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Install build dependencies
   apt: pkg="{{ item }}" state=latest
@@ -29,32 +30,49 @@
   command: make
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/bspwm"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make install
   command: make install
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/bspwm"
 
-# - name: Create default bspwmrc config file
-#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/bspwmrc" dest="{{ ansible_env.HOME }}/.config/bspwm/bspwmrc"
-#   when: bspwm.install.bspwmrc
+- name: Ensure that bspwm configuration directory exists
+  file: path="{{ ansible_env.HOME }}/.config/bspwm" state=directory owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
 
-# - name: Create default sxhkdrc config file
-#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/sxhkdrc" dest="{{ ansible_env.HOME }}/.config/sxhkd/sxhkdrc"
-#   when: bspwm.install.sxhkdrc
+- name: Ensure that sxhkd configuration directory exists
+  file: path="{{ ansible_env.HOME }}/.config/sxhkd" state=directory owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
 
-# - name: Create default panel config file (1/3)
-#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel"
-#   when: bspwm.install.panel
+- name: Ensure that panel configuration directory exists
+  file: path="{{ ansible_env.HOME }}/.config/install" state=directory owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
 
-# - name: Create default panel config file (2/3)
-#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel_bar" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel_bar"
-#   when: bspwm.install.panel
+- name: Create default bspwmrc config file
+  copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/bspwmrc" dest="{{ ansible_env.HOME }}/.config/bspwm/bspwmrc" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}" mode=0755
+  when: bspwm.install.bspwmrc
 
-# - name: Create default panel config file (3/3)
-#   copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel_colors" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel_colors"
-#   when: bspwm.install.panel
+- name: Append panel in bspwmrc
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/.config/bspwm/bspwmrc"
+    regexp: "^panel"
+    line: "panel &"
 
-# - name: Create default xinitrc config file
-#   copy: src="xinitrc" dest="{{ ansible_env.HOME }}/.xinitrc"
-#   when: bspwm.install.xinitrc
+- name: Create default sxhkdrc config file
+  copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/sxhkdrc" dest="{{ ansible_env.HOME }}/.config/sxhkd/sxhkdrc" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
+  when: bspwm.install.sxhkdrc
+
+- name: Create default panel config file (1/3)
+  copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}" mode=0755
+  when: bspwm.install.panel
+
+- name: Create default panel config file (2/3)
+  copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel_bar" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel_bar" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}" mode=0755
+  when: bspwm.install.panel
+
+- name: Create default panel config file (3/3)
+  copy: remote_src=yes src="{{ ansible_env.HOME }}/.cache/install/bspwm/examples/panel/panel_colors" dest="{{ ansible_env.HOME }}/.config/bspwm/panel/panel_colors" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}" mode=0755
+  when: bspwm.install.panel
+
+- name: Create default xinitrc config file
+  copy: src="xinitrc" dest="{{ ansible_env.HOME }}/.xinitrc" owner="{{ ansible_env.USER }}" group="{{ ansible_env.USER }}"
+  when: bspwm.install.xinitrc
