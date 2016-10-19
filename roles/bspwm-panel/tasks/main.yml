@@ -2,6 +2,8 @@
 
 - name: Clone xdo repository
   git: repo=https://github.com/baskerville/xdo.git dest="{{ ansible_env.HOME }}/.cache/install/xdo" update=yes accept_hostkey=yes
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Install build dependencies
   apt: pkg="{{ item }}" state=latest
@@ -22,6 +24,8 @@
   command: make
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/xdo"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make install xdo
   command: make install
@@ -30,11 +34,15 @@
 
 - name: Clone sutils repository
   git: repo=https://github.com/baskerville/sutils.git dest="{{ ansible_env.HOME }}/.cache/install/sutils" update=yes accept_hostkey=yes
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make sutils
   command: make
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/sutils"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make install sutils
   command: make install
@@ -43,11 +51,15 @@
 
 - name: Clone xtitle repository
   git: repo=https://github.com/baskerville/xtitle.git dest="{{ ansible_env.HOME }}/.cache/install/xtitle" update=yes accept_hostkey=yes
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make xtitle
   command: make
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/xtitle"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make install xtitle
   command: make install
@@ -56,11 +68,15 @@
 
 - name: Clone lemonbar repository
   git: repo=https://github.com/krypt-n/bar.git dest="{{ ansible_env.HOME }}/.cache/install/lemonbar" update=yes accept_hostkey=yes
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make lemonbar
   command: make
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/lemonbar"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make install lemonbar
   command: make install

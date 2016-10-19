@@ -2,6 +2,8 @@
 
 - name: Clone sxhkd repository
   git: repo=https://github.com/baskerville/sxhkd.git dest="{{ ansible_env.HOME }}/.cache/install/sxhkd" update=yes accept_hostkey=yes
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Install build dependencies
   apt: pkg="{{ item }}" state=latest
@@ -14,6 +16,8 @@
   command: make
   args:
     chdir: "{{ ansible_env.HOME }}/.cache/install/sxhkd"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
 
 - name: Make install
   command: make install
