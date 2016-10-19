@@ -7,6 +7,9 @@
 - name: Install
   apt: name=compton state=latest update_cache=yes
 
+- name: Ensure that configuration directory exists
+  file: path="{{ ansible_env.HOME }}/.config" state=directory
+
 - name: Create config file
   copy:
     src: compton.conf
