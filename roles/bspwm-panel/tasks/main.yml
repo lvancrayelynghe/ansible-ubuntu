@@ -67,7 +67,7 @@
     chdir: "{{ ansible_env.HOME }}/.cache/install/xtitle"
 
 - name: Clone lemonbar repository
-  git: repo=https://github.com/krypt-n/bar.git dest="{{ ansible_env.HOME }}/.cache/install/lemonbar" update=yes accept_hostkey=yes
+  git: repo=https://github.com/Benoth/bar.git dest="{{ ansible_env.HOME }}/.cache/install/lemonbar" update=yes accept_hostkey=yes
   become: true
   become_user: "{{ ansible_env.USER }}"
 
