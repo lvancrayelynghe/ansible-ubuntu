@@ -1,0 +1,18 @@
+---
+
+- name: Check if hubiC is installed
+  command: dpkg-query -W hubic
+  register: hubic_check_deb
+  failed_when: hubic_check_deb.rc > 1
+  changed_when: hubic_check_deb.rc == 1
+
+- name: Download hubiC
+  get_url: url="http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb" dest="/tmp/download-hubic-latest.deb"
+  when: hubic_check_deb.rc == 1
+
+- name: Install hubiC
+  apt: deb="/tmp/download-hubic-latest.deb"
+  when: hubic_check_deb.rc == 1
+
+- name: Clean hubiC deb file
+  file: path=/tmp/download-hubic-latest.deb state=absent
