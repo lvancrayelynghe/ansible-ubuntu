@@ -8,6 +8,7 @@
     - byzanz # screen recording
     - geany
     - libnotify-bin
+    - inotify-tools
     - meld # Diff / merge tool
     - cifs-utils
     - mpv
