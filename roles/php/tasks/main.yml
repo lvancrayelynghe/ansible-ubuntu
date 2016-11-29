@@ -29,6 +29,8 @@
     - php7.0-cli
     - php5.6-xml
     - php7.0-xml
+    - php5.6-bz2
+    - php7.0-bz2
     - mcrypt
     - openssl
     - php-imagick
