@@ -35,7 +35,7 @@
     # - { role: php-phar-tools, become: true }
     # - { role: python, become: true }
     # - { role: redis, become: true }
-    # - { role: ruby, become: true }
+    # - { role: rbenv, become: true }
     # - { role: ssh, become: true }
     # Desktop roles
     # - { role: desktop, become: true }

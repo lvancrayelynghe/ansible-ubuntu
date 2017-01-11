@@ -1,0 +1,42 @@
+---
+
+- name: Install Rbenv dependencies
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - libreadline-dev
+
+- name: Installs Rbenv
+  git: repo=https://github.com/sstephenson/rbenv.git dest={{ ansible_env.HOME }}/.rbenv accept_hostkey=true
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Installs Rbenv bash file
+  lineinfile: dest="{{ ansible_env.HOME }}/.zshrc_local" line="export PATH=$HOME/.rbenv/bin:$PATH"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Initialize Rbenv
+  lineinfile: dest="{{ ansible_env.HOME }}/.zshrc_local" line='eval "$(rbenv init -)"'
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Creates plugin directory
+  file: path="{{ ansible_env.HOME }}/.rbenv/plugins/" mode=0755 state=directory
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Installs Ruby-build
+  git: repo=git://github.com/sstephenson/ruby-build.git dest="{{ ansible_env.HOME }}/.rbenv/plugins/ruby-build" accept_hostkey=true
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Install Ruby
+  shell: "{{ ansible_env.HOME }}/.rbenv/bin/rbenv install 2.4.0"
+  failed_when: false
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Install Ruby
+  shell: "{{ ansible_env.HOME }}/.rbenv/bin/rbenv global 2.4.0"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
