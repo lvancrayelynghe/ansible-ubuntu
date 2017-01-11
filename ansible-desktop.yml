@@ -55,6 +55,7 @@
     # - { role: filezilla, become: true }
     # - { role: firefox, become: true }
     # - { role: flatabulous, become: true }
+    # - { role: gdrive, become: true }
     # - { role: geary, become: true }
     # - { role: gimp, become: true }
     # - { role: grub-customizer, become: true }

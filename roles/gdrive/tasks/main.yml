@@ -1,0 +1,18 @@
+---
+
+- name: Check if GDrive is installed
+  command: dpkg-query -W gdrive
+  register: gdrive_check_deb
+  failed_when: gdrive_check_deb.rc > 1
+  changed_when: gdrive_check_deb.rc == 1
+
+- name: Download GDrive {{ gdrive.version }}
+  get_url: url="https://www.thefanclub.co.za/sites/default/files/public/overgdrive/overgdrive_{{ gdrive.version }}_all.deb" dest="/tmp/download-gdrive-latest.deb"
+  when: gdrive_check_deb.rc == 1
+
+- name: Install GDrive {{ gdrive.version }}
+  apt: deb="/tmp/download-gdrive-latest.deb"
+  when: gdrive_check_deb.rc == 1
+
+- name: Clean GDrive deb file
+  file: path=/tmp/download-gdrive-latest.deb state=absent
