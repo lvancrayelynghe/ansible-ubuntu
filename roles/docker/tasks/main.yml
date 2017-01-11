@@ -7,7 +7,10 @@
   apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main' state=present
 
 - name: Install
-  apt: pkg=docker-engine state=latest update_cache=yes
+  apt: pkg="{{ item }}" state=latest update_cache=yes
+  with_items:
+    - linux-image-extra-virtual
+    - docker-engine
 
 - name: Create Docker group
   group: name=docker state=present
@@ -19,4 +22,4 @@
   service: name=docker state={{ docker.start | ternary('restarted','stopped') }} enabled={{ docker.service_enabled }}
 
 - name: Install docker-compose
-  get_url: url="https://github.com/docker/compose/releases/download/1.7.1/docker-compose-Linux-x86_64" dest=/usr/local/bin/docker-compose force=no mode=0755
+  get_url: url="https://github.com/docker/compose/releases/download/1.9.0/docker-compose-Linux-x86_64" dest=/usr/local/bin/docker-compose force=no mode=0755
