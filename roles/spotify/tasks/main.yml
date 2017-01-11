@@ -1,0 +1,10 @@
+---
+
+- name: Add apt keys of spotify
+  apt_key: keyserver=keyserver.ubuntu.com id=BBEBDCB318AD50EC6865090613B00F1FD2C19886
+
+- name: Add repository
+  apt_repository: repo="deb http://repository.spotify.com stable non-free"
+
+- name: Install spotify
+  apt: name=spotify-client update_cache=yes state=latest
