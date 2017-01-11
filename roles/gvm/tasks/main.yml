@@ -1,0 +1,40 @@
+---
+
+- name: Install GVM dependencies
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time={{ aptcachetime }}
+  with_items:
+    - curl
+    - git
+    - mercurial
+    - make
+    - binutils
+    - bison
+    - gcc
+    - build-essential
+
+- name: Download GVM
+  get_url: url="https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer" dest="/tmp/gvm-installer" mode=0755
+
+- name: Install GVM
+  shell: "/tmp/gvm-installer"
+  failed_when: false
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Make GVM executable
+  file: path="{{ ansible_env.HOME }}/.gvm/scripts/gvm-default" mode=0755
+
+- name: Install GVM
+  shell: "bash {{ ansible_env.HOME }}/.gvm/scripts/gvm-default"
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Install Go {{ gvm.version }}
+  shell: "bash -c \"source {{ ansible_env.HOME }}/.gvm/scripts/gvm && gvm install go{{ gvm.version }} --prefer-binary\""
+  become: true
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Make Go {{ gvm.version }} default
+  shell: "bash -c \"source {{ ansible_env.HOME }}/.gvm/scripts/gvm && gvm use go{{ gvm.version }} --default\""
+  become: true
+  become_user: "{{ ansible_env.USER }}"
